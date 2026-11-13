@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vibe Eletronics · Conserto de celular em Búzios em até 24h</title>
-<meta name="description" content="Assistência técnica de celulares em Armação dos Búzios, RJ. Troca de tela, bateria e conector, banho químico e software. Conserto em até 24h, 1 mês de garantia e 6 lojas no Centro e em Manguinhos.">
-<meta property="og:title" content="Vibe Eletronics · Conserto de celular em Búzios">
-<meta property="og:description" content="Conserto em até 24h, com 1 mês de garantia. Peça seu orçamento pelo WhatsApp da loja mais perto de você.">
+<title>Vibe Eletronics · Assistência técnica e eletrônicos em Búzios</title>
+<meta name="description" content="Conserto de celular em até 24h e loja de eletrônicos em Armação dos Búzios, RJ: películas, capas, fones, carregadores, cabos, celulares e mais. 6 lojas no Centro e em Manguinhos.">
+<meta property="og:title" content="Vibe Eletronics · Assistência técnica e eletrônicos em Búzios">
+<meta property="og:description" content="Conserto em até 24h com garantia, e películas, capas, fones, carregadores e mais. Fale com a loja mais perto pelo WhatsApp.">
 <meta property="og:image" content="https://blade0667.github.io/vibe-eletronics/img/og.jpg">
 <meta property="og:url" content="https://blade0667.github.io/vibe-eletronics/">
 <link rel="canonical" href="https://blade0667.github.io/vibe-eletronics/">
@@ -22,7 +22,7 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Vibe Eletronics",
-  "description": "Assistência técnica de celulares e venda de capas e acessórios em Armação dos Búzios, RJ.",
+  "description": "Assistência técnica de celulares e loja de eletrônicos e acessórios em Armação dos Búzios, RJ.",
   "telephone": "+55 22 99183-7583",
   "address": { "@type": "PostalAddress", "addressLocality": "Armação dos Búzios", "addressRegion": "RJ", "addressCountry": "BR" },
   "areaServed": "Armação dos Búzios",
@@ -59,7 +59,7 @@ section { padding: clamp(60px, 8vw, 104px) 0; }
 
 /* ---------- Tipos ---------- */
 h1, h2, h3, .osw { font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .035em; line-height: 1.06; }
-h1 { font-size: clamp(42px, 6.4vw, 78px); }
+h1 { font-size: clamp(38px, 5.4vw, 68px); }
 h2 { font-size: clamp(30px, 4.2vw, 48px); }
 h3 { font-size: 21px; letter-spacing: .05em; }
 em { font-style: normal; color: var(--mint); }
@@ -156,6 +156,14 @@ em { font-style: normal; color: var(--mint); }
 .servico b { display: block; font-size: 18px; font-weight: 800; line-height: 1.25; }
 .servico p { margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
 
+/* produtos */
+.cat { padding: 22px; display: flex; flex-direction: column; align-items: flex-start; background: rgba(11,5,32,.45); transition: border-color .15s, transform .15s; }
+.cat:hover { border-color: var(--mint); transform: translateY(-3px); }
+.cat svg { width: 40px; height: 40px; color: var(--mint); margin-bottom: 12px; }
+.cat b { font-size: 18px; font-weight: 800; line-height: 1.25; }
+.cat p { margin: 6px 0 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.cat .btn { margin-top: auto; }
+
 /* diferenciais */
 .perk { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 30px 16px; text-align: center; border-radius: 22px;
   background: linear-gradient(160deg, rgba(79,240,210,.16), rgba(79,140,255,.1)); border: 1.5px solid rgba(79,240,210,.42); }
@@ -178,6 +186,15 @@ em { font-style: normal; color: var(--mint); }
 .check li::before { margin-top: 2px; }
 form.card { padding: clamp(22px, 3vw, 34px); display: grid; gap: 16px; background: rgba(11,5,32,.55); }
 label { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+label[hidden] { display: none; }
+fieldset.tipo { border: 0; min-width: 0; }
+fieldset.tipo legend { font-size: 14px; font-weight: 700; margin-bottom: 7px; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; border-radius: 16px; background: rgba(255,255,255,.07); border: 1.5px solid var(--line); }
+.seg label { display: block; cursor: pointer; }
+.seg input { all: unset; position: absolute; opacity: 0; }
+.seg span { display: block; padding: 11px 8px; border-radius: 11px; text-align: center; font-size: 14.5px; font-weight: 800; color: var(--muted); }
+.seg input:checked + span { background: var(--mint); color: var(--bg1); }
+.seg input:focus-visible + span { outline: 3px solid var(--mint); outline-offset: 2px; }
 input, select, textarea {
   width: 100%; padding: 13px 15px; border-radius: 14px; border: 1.5px solid var(--line);
   background: rgba(255,255,255,.07); color: #fff; font: 600 16px/1.4 "Montserrat", sans-serif;
@@ -241,7 +258,7 @@ footer a:hover { color: #fff; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .surge { opacity: 1; translate: none; transition: none; }
-  .btn, .servico, .flutua { transition: none; }
+  .btn, .servico, .cat, .flutua { transition: none; }
 }
 </style>
 </head>
@@ -258,7 +275,8 @@ footer a:hover { color: #fff; }
       <span>VIBE<small>ELETRONICS</small></span>
     </a>
     <nav aria-label="Seções">
-      <a href="#servicos">Serviços</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#servicos">Assistência</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#lojas">Lojas</a>
       <a href="#duvidas">Dúvidas</a>
@@ -273,17 +291,17 @@ footer a:hover { color: #fff; }
 <section class="hero glow">
   <div class="wrap">
     <div>
-      <p class="eyebrow">Assistência técnica em Búzios</p>
-      <h1>Celular quebrou? <em>Pronto em até 24h.</em></h1>
-      <p class="lead">A Vibe Eletronics conserta seu celular com <b>1 mês de garantia</b> em 6 lojas em Armação dos Búzios. Mande o modelo e o defeito pelo WhatsApp e receba o orçamento da loja mais perto de você.</p>
+      <p class="eyebrow">Assistência técnica e eletrônicos em Búzios</p>
+      <h1>Conserto em até 24h <em>e uma loja inteira de eletrônicos.</em></h1>
+      <p class="lead">A Vibe Eletronics conserta seu celular com <b>1 mês de garantia</b> e vende películas, capas, fones, carregadores, cabos, celulares e muito mais em <b>6 lojas em Armação dos Búzios</b>.</p>
       <div class="acoes">
         <a class="btn wa" href="#orcamento"><svg><use href="#wa"/></svg>Pedir orçamento</a>
-        <a class="btn linha" href="#lojas">Ver as 6 lojas</a>
+        <a class="btn linha" href="#produtos">Ver produtos</a>
       </div>
       <ul class="selos">
         <li>Conserto em até 24h</li>
         <li>1 mês de garantia</li>
-        <li>Parcele no cartão</li>
+        <li>Mais de 1.000 produtos</li>
       </ul>
     </div>
 
@@ -316,11 +334,36 @@ footer a:hover { color: #fff; }
   </div>
 </div>
 
+<!-- Produtos (categorias do sistema das lojas) -->
+<section id="produtos" class="glow">
+  <div class="wrap">
+    <div class="head surge">
+      <p class="eyebrow">Produtos</p>
+      <h2>Muito além <em>do conserto.</em></h2>
+      <p class="lead">São mais de 1.000 produtos nas lojas. A disponibilidade varia de uma loja para outra: toque em <b>Consultar</b> e pergunte pelo WhatsApp antes de ir.</p>
+    </div>
+    <div class="g4">
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="12" height="20" rx="2.5"/><path d="M4 6v14a2 2 0 0 0 2 2M10.5 7.5l2-2M10.5 11l5-5"/></svg><b>Películas</b><p>De vidro, cerâmica, hidrogel e 5D para Samsung, Motorola, iPhone, Xiaomi e LG.</p><button class="btn linha mini" type="button" data-cat="Películas">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><rect x="8.5" y="4.5" width="4.5" height="4.5" rx="1.2"/></svg><b>Capas &amp; Cases</b><p>Silicone, transparente, magnética e carteira. Capas à prova d'água e cases para GoPro e HD.</p><button class="btn linha mini" type="button" data-cat="Capas &amp; Cases">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg><b>Áudio &amp; Fones</b><p>Fones Bluetooth e com fio, headphones, headsets e caixas de som, incluindo JBL.</p><button class="btn linha mini" type="button" data-cat="Áudio &amp; Fones">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L5 13.5h6L10 22l9-12h-6.5z"/></svg><b>Fontes &amp; Carregadores</b><p>Carregadores USB-C de até 65 W, veiculares, fontes de notebook e power banks.</p><button class="btn linha mini" type="button" data-cat="Fontes &amp; Carregadores">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5M9 7V2M15 7V2M7 7h10v5a5 5 0 0 1-10 0z"/></svg><b>Cabos &amp; Adaptadores</b><p>USB-C, iPhone, HDMI e P2, além de adaptadores e hubs USB.</p><button class="btn linha mini" type="button" data-cat="Cabos &amp; Adaptadores">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 18.5h3"/></svg><b>Celulares &amp; Tablets</b><p>Aparelhos Motorola, Xiaomi, Samsung e LG, do básico ao smartphone.</p><button class="btn linha mini" type="button" data-cat="Celulares &amp; Tablets">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><b>Informática &amp; TV</b><p>Mouses, teclados, pendrives, cartões de memória, roteadores e controles de TV e de videogame.</p><button class="btn linha mini" type="button" data-cat="Informática &amp; TV">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="5" width="10" height="17" rx="2"/><path d="M10 5V2.5h4V5M10 12h4M12 10v4M10.5 17.5h3"/></svg><b>Pilhas &amp; Baterias</b><p>Pilhas alcalinas e recarregáveis, baterias tipo moeda, 9V e 23A.</p><button class="btn linha mini" type="button" data-cat="Pilhas &amp; Baterias">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1.2 12.2a1.6 1.6 0 0 1-1.6 1.8H6.4a1.6 1.6 0 0 1-1.6-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><b>Acessórios &amp; Geral</b><p>Suportes de celular e veiculares, acessórios para GoPro, smartwatches, ring lights e tripés.</p><button class="btn linha mini" type="button" data-cat="Acessórios &amp; Geral">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="14.5" r="3.5"/><circle cx="17.5" cy="14.5" r="3.5"/><path d="M10 14.5a2 2 0 0 1 4 0M3 14l2-7M21 14l-2-7"/></svg><b>Óculos &amp; Ótica</b><p>Óculos de sol, polarizados, de grau prontos e de natação.</p><button class="btn linha mini" type="button" data-cat="Óculos &amp; Ótica">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5.5"/><path d="M7 11v3M5.5 12.5h3M15.5 11.5v.01M18 13.5v.01"/></svg><b>Games &amp; Brinquedos</b><p>Brinquedos, jogos, baralhos e livros de colorir para as crianças.</p><button class="btn linha mini" type="button" data-cat="Games &amp; Brinquedos">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1.5 13h-9zM5 8h14M9 8l1-5h4l1 5"/></svg><b>Praia &amp; Térmicos</b><p>Copos, canecas e garrafas térmicas, cadeiras, cangas, bodyboard e frescobol.</p><button class="btn linha mini" type="button" data-cat="Praia &amp; Térmicos">Consultar</button></article>
+    </div>
+  </div>
+</section>
+
 <!-- Serviços -->
 <section id="servicos" class="escuro">
   <div class="wrap">
     <div class="head surge">
-      <p class="eyebrow">Serviços</p>
+      <p class="eyebrow">Assistência técnica</p>
       <h2>Do vidro trincado ao <em>celular que caiu na água.</em></h2>
     </div>
     <div class="g4">
@@ -347,7 +390,7 @@ footer a:hover { color: #fff; }
       <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="8"/><path d="M12 9.5v4l2.500 2M10 2h4M12 2v3.500"/></svg><b>Até 24h</b><span>Seu celular consertado em até um dia.</span></div>
       <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></svg><b>1 mês</b><span>De garantia em todo serviço.</span></div>
       <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.500"/><path d="M2 10h20M6 15h4"/></svg><b>No cartão</b><span>Parcele o conserto no cartão de crédito.</span></div>
-      <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.200 7-12a7 7 0 0 0-14 0c0 5.800 7 12 7 12z"/><circle cx="12" cy="10" r="2.500"/></svg><b>6 lojas</b><span>No Centro e em Manguinhos, com capas e acessórios.</span></div>
+      <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.200 7-12a7 7 0 0 0-14 0c0 5.800 7 12 7 12z"/><circle cx="12" cy="10" r="2.500"/></svg><b>6 lojas</b><span>No Centro e em Manguinhos, com assistência e produtos.</span></div>
     </div>
   </div>
 </section>
@@ -371,16 +414,23 @@ footer a:hover { color: #fff; }
 <section id="orcamento" class="glow">
   <div class="wrap orc">
     <div class="surge">
-      <p class="eyebrow">Orçamento</p>
-      <h2>Peça agora, <em>direto com a loja.</em></h2>
-      <p class="lead">Preencha os dados e o seu WhatsApp abre com a mensagem pronta para a loja escolhida. É só enviar.</p>
+      <p class="eyebrow">Orçamento e consulta</p>
+      <h2>Fale agora, <em>direto com a loja.</em></h2>
+      <p class="lead">Peça o orçamento de um conserto ou pergunte se um produto está disponível. O seu WhatsApp abre com a mensagem pronta para a loja escolhida.</p>
       <ul class="check">
         <li>A mensagem vai do seu WhatsApp para o da loja.</li>
         <li>Nada do que você digita fica guardado neste site.</li>
-        <li>Você fala com a unidade que vai fazer o conserto.</li>
+        <li>Você fala com a unidade que vai atender você.</li>
       </ul>
     </div>
     <form class="card surge" id="form-orc" novalidate>
+      <fieldset class="tipo">
+        <legend>O que você precisa?</legend>
+        <div class="seg">
+          <label><input type="radio" name="tipo" value="conserto" checked><span>Consertar o celular</span></label>
+          <label><input type="radio" name="tipo" value="produto"><span>Consultar um produto</span></label>
+        </div>
+      </fieldset>
       <label>Loja
         <select id="f-loja" required>
           <option value="" disabled selected>Escolha a loja mais perto</option>
@@ -389,10 +439,10 @@ footer a:hover { color: #fff; }
       <label>Seu nome
         <input id="f-nome" type="text" autocomplete="given-name" placeholder="Como podemos te chamar?" required>
       </label>
-      <label>Marca e modelo do aparelho
+      <label id="l-aparelho">Marca e modelo do aparelho
         <input id="f-aparelho" type="text" placeholder="Ex.: Samsung A54" required>
       </label>
-      <label>O que aconteceu?
+      <label><span id="t-defeito">O que aconteceu?</span>
         <textarea id="f-defeito" rows="3" placeholder="Ex.: caiu no chão e a tela trincou" required></textarea>
       </label>
       <button class="btn wa largo" type="submit"><svg><use href="#wa"/></svg>Enviar pelo WhatsApp</button>
@@ -448,7 +498,7 @@ footer a:hover { color: #fff; }
       <details class="surge"><summary>Meu celular caiu na água. O que eu faço?</summary><p>Chame a loja o quanto antes. A Vibe faz banho químico e desoxidação, os serviços indicados para aparelhos que tiveram contato com líquido.</p></details>
       <details class="surge"><summary>Posso parcelar?</summary><p>Sim, o conserto pode ser parcelado no cartão de crédito.</p></details>
       <details class="surge"><summary>Como ganho os 5% de desconto?</summary><p>Siga o perfil @vibe.eletronics no Instagram e mostre na loja.</p></details>
-      <details class="surge"><summary>Vocês vendem acessórios?</summary><p>Sim. As lojas vendem capas e acessórios para celular.</p></details>
+      <details class="surge"><summary>O que vocês vendem além do conserto?</summary><p>Películas, capas, fones e caixas de som, carregadores, cabos, pilhas, celulares, itens de informática, óculos, brinquedos e produtos de praia. A disponibilidade varia de loja para loja: consulte pelo WhatsApp antes de ir.</p></details>
     </div>
   </div>
 </section>
@@ -457,10 +507,10 @@ footer a:hover { color: #fff; }
 <section class="glow fim">
   <div class="wrap surge">
     <h2>Seu celular funcionando de novo <em>em até 24 horas.</em></h2>
-    <p class="lead" style="margin-inline:auto">Mande o modelo e o defeito e receba o orçamento da loja mais perto de você.</p>
+    <p class="lead" style="margin-inline:auto">Peça o orçamento do conserto ou consulte um produto na loja mais perto de você.</p>
     <div class="acoes">
       <a class="btn wa" href="#orcamento"><svg><use href="#wa"/></svg>Pedir orçamento</a>
-      <a class="btn linha" href="#lojas">Ver as lojas</a>
+      <a class="btn linha" href="#produtos">Ver produtos</a>
     </div>
   </div>
 </section>
@@ -528,18 +578,45 @@ for (const bairro of bairros) {
 }
 function escolherLoja(fone) {
   select.value = fone;
+  form.elements.tipo.value = "conserto";
+  ajustarTipo();
   document.getElementById("orcamento").scrollIntoView();
   document.getElementById("f-nome").focus({ preventScroll: true });
 }
 
 // ---------- Orçamento: monta a mensagem e abre o WhatsApp da loja ----------
+const form = document.getElementById("form-orc");
+const tipo = () => form.elements.tipo.value;
 function montarLink() {
   const loja = LOJAS.find(l => l.fone === select.value);
   const v = id => document.getElementById(id).value.trim();
-  const texto = `*PRÉ-REGISTRO DE MANUTENÇÃO*\n\n*Loja:* ${loja.nome}\n*Cliente:* ${v("f-nome")}\n*Aparelho:* ${v("f-aparelho")}\n*Defeito relatado:* ${v("f-defeito")}\n\n_Olá! Vim pelo site e gostaria de um orçamento._`;
+  const texto = tipo() === "produto"
+    ? `*CONSULTA DE PRODUTO*\n\n*Loja:* ${loja.nome}\n*Cliente:* ${v("f-nome")}\n*Produto:* ${v("f-defeito")}\n\n_Olá! Vim pelo site e gostaria de saber se vocês têm esse produto._`
+    : `*PRÉ-REGISTRO DE MANUTENÇÃO*\n\n*Loja:* ${loja.nome}\n*Cliente:* ${v("f-nome")}\n*Aparelho:* ${v("f-aparelho")}\n*Defeito relatado:* ${v("f-defeito")}\n\n_Olá! Vim pelo site e gostaria de um orçamento._`;
   return `https://wa.me/${loja.fone}?text=${encodeURIComponent(texto)}`;
 }
-const form = document.getElementById("form-orc");
+// troca os campos conforme o tipo de pedido
+let tipoAnterior = "conserto";
+function ajustarTipo() {
+  const produto = tipo() === "produto";
+  if (tipo() !== tipoAnterior) document.getElementById("f-defeito").value = ""; // não leva o texto de um modo para o outro
+  tipoAnterior = tipo();
+  const aparelho = document.getElementById("f-aparelho");
+  document.getElementById("l-aparelho").hidden = produto;
+  aparelho.required = !produto;
+  document.getElementById("t-defeito").textContent = produto ? "Qual produto você procura?" : "O que aconteceu?";
+  document.getElementById("f-defeito").placeholder = produto ? "Ex.: película para Moto G54" : "Ex.: caiu no chão e a tela trincou";
+}
+form.elements.tipo.forEach(r => r.addEventListener("change", ajustarTipo));
+// botão "Consultar" de cada categoria: abre o formulário já no modo produto
+document.querySelectorAll("[data-cat]").forEach(b => b.addEventListener("click", () => {
+  form.elements.tipo.value = "produto";
+  ajustarTipo();
+  const campo = document.getElementById("f-defeito");
+  campo.value = b.dataset.cat + ": ";
+  document.getElementById("orcamento").scrollIntoView();
+  campo.focus({ preventScroll: true });
+}));
 form.addEventListener("submit", e => {
   e.preventDefault();
   if (!form.checkValidity()) { form.reportValidity(); return; }
