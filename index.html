@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vibe Eletronics · Conserto de celular em Búzios em até 24h</title>
+<meta name="description" content="Assistência técnica de celulares em Armação dos Búzios, RJ. Troca de tela, bateria e conector, banho químico e software. Conserto em até 24h, 1 mês de garantia e 6 lojas no Centro e em Manguinhos.">
+<meta property="og:title" content="Vibe Eletronics · Conserto de celular em Búzios">
+<meta property="og:description" content="Conserto em até 24h, com 1 mês de garantia. Peça seu orçamento pelo WhatsApp da loja mais perto de você.">
+<meta property="og:image" content="https://blade0667.github.io/vibe-eletronics/img/og.jpg">
+<meta property="og:url" content="https://blade0667.github.io/vibe-eletronics/">
+<link rel="canonical" href="https://blade0667.github.io/vibe-eletronics/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta name="theme-color" content="#0b0520">
+<link rel="icon" href="img/icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Vibe Eletronics",
+  "description": "Assistência técnica de celulares e venda de capas e acessórios em Armação dos Búzios, RJ.",
+  "telephone": "+55 22 99183-7583",
+  "address": { "@type": "PostalAddress", "addressLocality": "Armação dos Búzios", "addressRegion": "RJ", "addressCountry": "BR" },
+  "areaServed": "Armação dos Búzios",
+  "url": "https://blade0667.github.io/vibe-eletronics/",
+  "sameAs": ["https://www.instagram.com/vibe.eletronics/"]
+}
+</script>
+<style>
+/* Landing page da Vibe Eletronics — mesma identidade do flyer: roxo profundo, verde-água, Oswald + Montserrat */
+:root {
+  --bg0: #0b0520; --bg1: #1c0e40; --bg2: #3e1f7a;
+  --mint: #4ff0d2; --cyan: #2fd8ff; --muted: #cfc6f2; --text: #fff;
+  --glass: rgba(255,255,255,.06); --line: rgba(160,230,255,.22);
+  --max: 1160px; --gut: clamp(18px, 4vw, 40px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { font: 500 17px/1.6 "Montserrat", "Segoe UI", sans-serif; color: var(--text); background: var(--bg0); overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; border-radius: 8px; }
+.wrap { width: min(var(--max), 100% - 2 * var(--gut)); margin-inline: auto; }
+section { padding: clamp(60px, 8vw, 104px) 0; }
+
+.glow { position: relative; isolation: isolate; }
+.glow::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(70% 55% at 88% 0%, rgba(47,216,255,.24), transparent 60%),
+    radial-gradient(60% 70% at 0% 60%, rgba(124,77,255,.34), transparent 60%),
+    repeating-linear-gradient(115deg, transparent 0 140px, rgba(255,255,255,.028) 140px 220px, transparent 220px 360px),
+    linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 55%, #24125a 100%);
+}
+
+/* ---------- Tipos ---------- */
+h1, h2, h3, .osw { font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .035em; line-height: 1.06; }
+h1 { font-size: clamp(42px, 6.4vw, 78px); }
+h2 { font-size: clamp(30px, 4.2vw, 48px); }
+h3 { font-size: 21px; letter-spacing: .05em; }
+em { font-style: normal; color: var(--mint); }
+.eyebrow { font: 600 15px/1 "Oswald", sans-serif; letter-spacing: .22em; text-transform: uppercase; color: var(--mint); margin-bottom: 14px; }
+.lead { color: var(--muted); font-size: clamp(17px, 1.6vw, 19.5px); max-width: 58ch; margin-top: 18px; }
+.lead b, p b { color: #fff; font-weight: 700; }
+.head { margin-bottom: clamp(30px, 4vw, 48px); }
+.head.centro { text-align: center; }
+.head.centro .lead { margin-inline: auto; }
+
+/* ---------- Peças ---------- */
+.card { background: var(--glass); border: 1.5px solid var(--line); border-radius: 22px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px 26px; border-radius: 999px; border: 2px solid transparent;
+  font: 800 16px/1 "Montserrat", sans-serif; text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn:hover { transform: translateY(-2px); }
+.btn.cheio { background: var(--mint); color: var(--bg1); box-shadow: 0 10px 32px rgba(79,240,210,.3); }
+.btn.linha { border-color: rgba(79,240,210,.55); color: #fff; background: transparent; }
+.btn.linha:hover { background: rgba(79,240,210,.12); }
+.btn.wa { background: linear-gradient(90deg, #25d366, #128c7e); color: #fff; box-shadow: 0 10px 30px rgba(37,211,102,.28); }
+.btn.mini { padding: 10px 16px; font-size: 13.5px; }
+.btn.largo { width: 100%; }
+
+/* ---------- Topo ---------- */
+.topo { position: sticky; top: 0; z-index: 20; background: rgba(11,5,32,.82); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,.08); }
+.topo .wrap { display: flex; align-items: center; gap: 24px; height: 68px; }
+.marca { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
+.marca img { width: 42px; height: 42px; }
+.marca span { font-weight: 900; font-size: 21px; letter-spacing: .02em; line-height: 1.1; }
+.marca small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .33em; color: var(--mint); }
+.topo nav { display: flex; gap: 24px; }
+.topo nav a { font-size: 14.5px; font-weight: 700; text-decoration: none; color: var(--muted); }
+.topo nav a:hover { color: #fff; }
+@media (max-width: 900px) { .topo nav { display: none; } }
+
+/* ---------- Abertura ---------- */
+.hero { padding: clamp(44px, 6vw, 84px) 0 clamp(56px, 7vw, 96px); overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+.hero .acoes { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 28px; }
+.selos { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.selos li { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; }
+.selos li::before, .check li::before {
+  content: ""; flex: none; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%231c0e40' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/15px no-repeat;
+}
+
+/* celular com a conversa */
+.cena { position: relative; justify-self: center; width: min(320px, 82vw); }
+.cena::before { content: ""; position: absolute; inset: -12% -22%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(79,240,210,.32), transparent); }
+.fone { border-radius: 44px; padding: 12px; background: linear-gradient(160deg, #2a1a5c, #0b0520); border: 2px solid rgba(160,230,255,.35); box-shadow: 0 40px 90px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.04); }
+.tela { border-radius: 33px; overflow: hidden; background: #120a2c; }
+.tela header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.08); }
+.tela header img { width: 36px; height: 36px; }
+.tela header b { display: block; font-size: 14.5px; font-weight: 800; line-height: 1.2; }
+.tela header small { display: block; font-size: 11.5px; color: var(--mint); font-weight: 700; }
+.chat { display: flex; flex-direction: column; gap: 9px; padding: 16px 14px 20px; min-height: 380px; }
+.msg { max-width: 84%; padding: 9px 13px; border-radius: 16px; font-size: 13.5px; line-height: 1.4; font-weight: 600; }
+.msg.eu { align-self: flex-end; background: var(--mint); color: var(--bg1); border-bottom-right-radius: 5px; }
+.msg.ela { align-self: flex-start; background: rgba(255,255,255,.1); border-bottom-left-radius: 5px; }
+.cena figcaption { margin-top: 14px; text-align: center; font-size: 12.5px; color: var(--muted); }
+.etiqueta { position: absolute; padding: 10px 16px; border-radius: 16px; background: #fff; color: var(--bg1); font: 700 15px/1.15 "Oswald", sans-serif; letter-spacing: .04em; text-transform: uppercase; box-shadow: 0 14px 34px rgba(0,0,0,.45); }
+.etiqueta b { display: block; font-size: 26px; color: #0b8f7b; }
+.etiqueta.a { top: 16%; left: -19%; rotate: -6deg; }
+.etiqueta.b { bottom: 20%; right: -17%; rotate: 5deg; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .cena { margin-top: 18px; }
+  .etiqueta.a { top: -18px; left: auto; right: -3%; rotate: 5deg; } .etiqueta.b { bottom: 26px; right: auto; left: -3%; rotate: -5deg; }
+}
+
+/* ---------- Marcas ---------- */
+.marcas { padding: 22px 0; background: var(--bg0); border-block: 1px solid rgba(255,255,255,.08); }
+.marcas .wrap { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px 14px; }
+.marcas span { font: 600 14px/1 "Oswald", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--mint); margin-right: 8px; }
+.marcas b { padding: 9px 18px; border-radius: 999px; background: rgba(255,255,255,.95); color: var(--bg1); font-weight: 800; font-size: 15px; }
+
+/* ---------- Grades ---------- */
+.g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 900px) { .g4 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .g2, .g3 { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .g4 { grid-template-columns: 1fr; } }
+.escuro { background: var(--bg0); }
+
+/* serviços */
+.servico { padding: 24px 22px; transition: border-color .15s, transform .15s; }
+.servico:hover { border-color: var(--mint); transform: translateY(-3px); }
+.servico svg { width: 44px; height: 44px; color: var(--mint); margin-bottom: 14px; }
+.servico b { display: block; font-size: 18px; font-weight: 800; line-height: 1.25; }
+.servico p { margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+
+/* diferenciais */
+.perk { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 30px 16px; text-align: center; border-radius: 22px;
+  background: linear-gradient(160deg, rgba(79,240,210,.16), rgba(79,140,255,.1)); border: 1.5px solid rgba(79,240,210,.42); }
+.perk svg { width: 54px; height: 54px; color: var(--mint); }
+.perk b { font: 700 30px/1 "Oswald", sans-serif; text-transform: uppercase; letter-spacing: .03em; }
+.perk span { font-size: 14.5px; color: var(--muted); line-height: 1.45; }
+
+/* passos */
+.passos { counter-reset: p; position: relative; }
+.passo { padding: 28px 26px; position: relative; }
+.passo::before { counter-increment: p; content: counter(p); display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--mint); color: var(--bg1); font-weight: 900; font-size: 23px; margin-bottom: 16px; }
+.passo b { display: block; font-size: 19px; font-weight: 800; }
+.passo p { margin-top: 6px; font-size: 15.5px; color: var(--muted); }
+
+/* ---------- Orçamento ---------- */
+.orc { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(26px, 5vw, 64px); align-items: center; }
+@media (max-width: 860px) { .orc { grid-template-columns: 1fr; } }
+.check { list-style: none; display: grid; gap: 12px; margin-top: 24px; }
+.check li { display: flex; align-items: flex-start; gap: 12px; font-weight: 600; font-size: 16px; }
+.check li::before { margin-top: 2px; }
+form.card { padding: clamp(22px, 3vw, 34px); display: grid; gap: 16px; background: rgba(11,5,32,.55); }
+label { display: grid; gap: 7px; font-size: 14px; font-weight: 700; }
+input, select, textarea {
+  width: 100%; padding: 13px 15px; border-radius: 14px; border: 1.5px solid var(--line);
+  background: rgba(255,255,255,.07); color: #fff; font: 600 16px/1.4 "Montserrat", sans-serif;
+}
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%234ff0d2' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 20px; padding-right: 44px; }
+select option, select optgroup { background: #1c0e40; color: #fff; }
+input::placeholder, textarea::placeholder { color: rgba(207,198,242,.6); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--mint); box-shadow: 0 0 0 3px rgba(79,240,210,.22); }
+.nota { font-size: 13px; color: var(--muted); text-align: center; }
+
+/* ---------- Lojas ---------- */
+.bairro { font: 600 17px/1 "Oswald", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--mint); margin: 30px 0 14px; }
+.bairro:first-of-type { margin-top: 0; }
+.loja { padding: 22px; display: flex; flex-direction: column; gap: 3px; }
+.loja b { font-size: 21px; font-weight: 800; }
+.loja .fone-n { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--muted); }
+.loja .acoes { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.sac { margin-top: 26px; padding: 22px 26px; border-radius: 22px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(90deg, #25d366, #128c7e); text-decoration: none; }
+.sac svg { width: 44px; height: 44px; flex: none; }
+.sac div { flex: 1; min-width: 180px; }
+.sac b { display: block; font-size: 22px; font-weight: 900; text-transform: uppercase; letter-spacing: .03em; line-height: 1.2; }
+.sac span { font-size: 15px; font-weight: 600; }
+.sac strong { font-size: clamp(22px, 3vw, 30px); font-weight: 900; font-variant-numeric: tabular-nums; }
+
+/* ---------- Instagram ---------- */
+.insta { display: grid; grid-template-columns: 1fr auto; gap: clamp(24px, 5vw, 60px); align-items: center; padding: clamp(26px, 4vw, 48px); border-radius: 30px;
+  background: linear-gradient(120deg, rgba(79,240,210,.2), rgba(79,140,255,.14)); border: 1.5px solid rgba(79,240,210,.45); }
+.insta .num { font: 700 clamp(72px, 12vw, 132px)/.9 "Oswald", sans-serif; color: var(--mint); }
+.insta h2 { margin-top: 6px; }
+.insta .btn { margin-top: 24px; }
+.insta img { width: 210px; padding: 8px; border-radius: 24px; background: #fff; box-shadow: 0 0 0 4px var(--mint), 0 0 46px rgba(79,240,210,.4); }
+@media (max-width: 720px) { .insta { grid-template-columns: 1fr; } .insta img { width: 170px; } }
+
+/* ---------- Dúvidas ---------- */
+.faq { max-width: 820px; margin-inline: auto; display: grid; gap: 12px; }
+details { border-radius: 18px; background: var(--glass); border: 1.5px solid var(--line); }
+details[open] { border-color: rgba(79,240,210,.55); }
+summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; font-weight: 800; font-size: 17px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; flex: none; width: 22px; height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%234ff0d2' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; transition: rotate .2s; }
+details[open] summary::after { rotate: 180deg; }
+details p { padding: 0 22px 20px; color: var(--muted); font-size: 16px; }
+
+/* ---------- Fechamento ---------- */
+.fim { text-align: center; }
+.fim .acoes { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+footer { padding: 30px 0 96px; background: var(--bg0); color: var(--muted); font-size: 14px; border-top: 1px solid rgba(255,255,255,.08); }
+footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 14px 30px; flex-wrap: wrap; }
+footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+footer a { text-decoration: none; font-weight: 700; }
+footer a:hover { color: #fff; }
+
+/* botão flutuante */
+.flutua { position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #25d366, #128c7e); box-shadow: 0 12px 34px rgba(0,0,0,.5); transition: transform .15s; }
+.flutua:hover { transform: scale(1.07); }
+.flutua svg { width: 32px; height: 32px; }
+
+/* entrada suave (só com JavaScript ligado) */
+.js .surge { opacity: 0; translate: 0 22px; transition: opacity .6s ease, translate .6s ease; }
+.js .surge.visto { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .surge { opacity: 1; translate: none; transition: none; }
+  .btn, .servico, .flutua { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2A9.8 9.8 0 0 0 3.6 17l-1.3 4.6 4.8-1.3A9.8 9.8 0 1 0 12 2.2zm5.3 13.6c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></symbol>
+</svg>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="marca" href="#inicio" aria-label="Vibe Eletronics, início">
+      <img src="img/vibe-simbolo.webp" alt="" width="42" height="42">
+      <span>VIBE<small>ELETRONICS</small></span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="#servicos">Serviços</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#lojas">Lojas</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a class="btn cheio mini" href="#orcamento">Pedir orçamento</a>
+  </div>
+</header>
+
+<main id="inicio">
+
+<!-- Abertura -->
+<section class="hero glow">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Assistência técnica em Búzios</p>
+      <h1>Celular quebrou? <em>Pronto em até 24h.</em></h1>
+      <p class="lead">A Vibe Eletronics conserta seu celular com <b>1 mês de garantia</b> em 6 lojas em Armação dos Búzios. Mande o modelo e o defeito pelo WhatsApp e receba o orçamento da loja mais perto de você.</p>
+      <div class="acoes">
+        <a class="btn wa" href="#orcamento"><svg><use href="#wa"/></svg>Pedir orçamento</a>
+        <a class="btn linha" href="#lojas">Ver as 6 lojas</a>
+      </div>
+      <ul class="selos">
+        <li>Conserto em até 24h</li>
+        <li>1 mês de garantia</li>
+        <li>Parcele no cartão</li>
+      </ul>
+    </div>
+
+    <figure class="cena">
+      <div class="fone">
+        <div class="tela">
+          <header><img src="img/vibe-simbolo.webp" alt="" width="36" height="36"><div><b>Vibe Eletronics</b><small>online</small></div></header>
+          <div class="chat">
+            <p class="msg eu">Oi! Meu celular caiu e a tela trincou.</p>
+            <p class="msg ela">Oi! Qual é o modelo do aparelho?</p>
+            <p class="msg eu">iPhone 13.</p>
+            <p class="msg ela">Te mando o orçamento agora. Trazendo hoje, fica pronto em até 24h.</p>
+            <p class="msg ela">E sai com 1 mês de garantia.</p>
+            <p class="msg eu">Fechado, estou indo aí!</p>
+          </div>
+        </div>
+      </div>
+      <span class="etiqueta a">Pronto em<b>até 24h</b></span>
+      <span class="etiqueta b">Garantia de<b>1 mês</b></span>
+      <figcaption>Conversa ilustrativa</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Marcas -->
+<div class="marcas" aria-label="Marcas atendidas">
+  <div class="wrap">
+    <span>Atendemos</span>
+    <b>iPhone</b><b>Samsung</b><b>Xiaomi</b><b>Motorola</b><b>Poco</b><b>Realme</b>
+  </div>
+</div>
+
+<!-- Serviços -->
+<section id="servicos" class="escuro">
+  <div class="wrap">
+    <div class="head surge">
+      <p class="eyebrow">Serviços</p>
+      <h2>Do vidro trincado ao <em>celular que caiu na água.</em></h2>
+    </div>
+    <div class="g4">
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 6l2 3-2 2 3 3-1 3"/></svg><b>Troca de tela</b><p>Frontal trincada, com manchas ou sem toque.</p></div>
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="17" height="10" rx="2.5"/><path d="M22 10.5v3M11.5 9.5l-2.5 3h3l-2.5 3"/></svg><b>Troca de bateria</b><p>Bateria que descarrega rápido, estufa ou desliga sozinha.</p></div>
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0zM12 17v5"/></svg><b>Conector de carga</b><p>Cabo que só carrega em uma posição ou não encaixa.</p></div>
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><b>Placa de carga</b><p>Aparelho que não carrega nem com conector novo.</p></div>
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.500 9.500 12 2.500 12 2.500z"/><path d="M9 14.500a3 3 0 0 0 3 3"/></svg><b>Banho químico</b><p>Para celular que molhou ou caiu na água.</p></div>
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.800 3h10.400a2 2 0 0 0 1.800-3l-5-9V3M7.500 15h9"/></svg><b>Desoxidação</b><p>Remoção da oxidação da placa depois do contato com líquido.</p></div>
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.800 4.700L18.500 9.500l-4.700 1.800L12 16l-1.800-4.700L5.500 9.500l4.700-1.800zM19 15l.800 2.200L22 18l-2.200.800L19 21l-.800-2.200L16 18l2.200-.800zM5 15.500l.600 1.600 1.600.600-1.600.600L5 20l-.600-1.700-1.600-.600 1.600-.600z"/></svg><b>Limpeza interna</b><p>Poeira e sujeira em alto-falante, microfone e entradas.</p></div>
+      <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M10 9.500l-2.500 2.500 2.500 2.500M14 9.500l2.500 2.500-2.500 2.500"/></svg><b>Software e vírus</b><p>Sistema travando, lento ou com vírus.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Diferenciais -->
+<section id="diferenciais" class="glow">
+  <div class="wrap">
+    <div class="head centro surge">
+      <p class="eyebrow">Por que a Vibe</p>
+      <h2>Rápido, garantido <em>e perto de você.</em></h2>
+    </div>
+    <div class="g4">
+      <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="8"/><path d="M12 9.5v4l2.500 2M10 2h4M12 2v3.500"/></svg><b>Até 24h</b><span>Seu celular consertado em até um dia.</span></div>
+      <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></svg><b>1 mês</b><span>De garantia em todo serviço.</span></div>
+      <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.500"/><path d="M2 10h20M6 15h4"/></svg><b>No cartão</b><span>Parcele o conserto no cartão de crédito.</span></div>
+      <div class="perk surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.200 7-12a7 7 0 0 0-14 0c0 5.800 7 12 7 12z"/><circle cx="12" cy="10" r="2.500"/></svg><b>6 lojas</b><span>No Centro e em Manguinhos, com capas e acessórios.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Como funciona -->
+<section id="como-funciona" class="escuro">
+  <div class="wrap">
+    <div class="head surge">
+      <p class="eyebrow">Como funciona</p>
+      <h2>Três passos <em>e o celular volta a funcionar.</em></h2>
+    </div>
+    <div class="g3 passos">
+      <div class="card passo surge"><b>Chame no WhatsApp</b><p>Escolha a loja mais perto e envie o modelo do aparelho e o defeito.</p></div>
+      <div class="card passo surge"><b>Receba o orçamento</b><p>A loja responde com o valor do conserto. Se você segue a Vibe no Instagram, ganha 5% de desconto.</p></div>
+      <div class="card passo surge"><b>Leve o aparelho</b><p>O conserto fica pronto em até 24 horas e sai com 1 mês de garantia.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Orçamento -->
+<section id="orcamento" class="glow">
+  <div class="wrap orc">
+    <div class="surge">
+      <p class="eyebrow">Orçamento</p>
+      <h2>Peça agora, <em>direto com a loja.</em></h2>
+      <p class="lead">Preencha os dados e o seu WhatsApp abre com a mensagem pronta para a loja escolhida. É só enviar.</p>
+      <ul class="check">
+        <li>A mensagem vai do seu WhatsApp para o da loja.</li>
+        <li>Nada do que você digita fica guardado neste site.</li>
+        <li>Você fala com a unidade que vai fazer o conserto.</li>
+      </ul>
+    </div>
+    <form class="card surge" id="form-orc" novalidate>
+      <label>Loja
+        <select id="f-loja" required>
+          <option value="" disabled selected>Escolha a loja mais perto</option>
+        </select>
+      </label>
+      <label>Seu nome
+        <input id="f-nome" type="text" autocomplete="given-name" placeholder="Como podemos te chamar?" required>
+      </label>
+      <label>Marca e modelo do aparelho
+        <input id="f-aparelho" type="text" placeholder="Ex.: Samsung A54" required>
+      </label>
+      <label>O que aconteceu?
+        <textarea id="f-defeito" rows="3" placeholder="Ex.: caiu no chão e a tela trincou" required></textarea>
+      </label>
+      <button class="btn wa largo" type="submit"><svg><use href="#wa"/></svg>Enviar pelo WhatsApp</button>
+      <p class="nota">Abre o WhatsApp em uma nova aba.</p>
+    </form>
+  </div>
+</section>
+
+<!-- Lojas -->
+<section id="lojas" class="escuro">
+  <div class="wrap">
+    <div class="head surge">
+      <p class="eyebrow">Lojas</p>
+      <h2>Seis lojas em <em>Armação dos Búzios.</em></h2>
+      <p class="lead">Cada loja tem o seu WhatsApp. Fale direto com a unidade mais perto.</p>
+    </div>
+    <div id="lista-lojas"><noscript><p class="lead">A lista de lojas precisa do JavaScript ligado. Enquanto isso, fale com o SAC pelo WhatsApp abaixo.</p></noscript></div>
+    <a class="sac surge" href="https://wa.me/5522991837583?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20ajuda%20do%20SAC%20da%20Vibe%20Eletronics." target="_blank" rel="noopener">
+      <svg style="color:#fff"><use href="#wa"/></svg>
+      <div><b>SAC Vibe</b><span>Dúvidas gerais e suporte</span></div>
+      <strong>(22) 99183-7583</strong>
+    </a>
+  </div>
+</section>
+
+<!-- Instagram -->
+<section class="glow">
+  <div class="wrap">
+    <div class="insta surge">
+      <div>
+        <div class="num">5%</div>
+        <h2>de desconto para <em>quem segue a Vibe.</em></h2>
+        <p class="lead">Siga <b>@vibe.eletronics</b> no Instagram e mostre na loja na hora de pagar.</p>
+        <a class="btn cheio" href="https://www.instagram.com/vibe.eletronics/" target="_blank" rel="noopener">Seguir no Instagram</a>
+      </div>
+      <img src="img/vibe-qr-instagram.webp" alt="QR code que abre o Instagram @vibe.eletronics" width="360" height="360" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- Dúvidas -->
+<section id="duvidas" class="escuro">
+  <div class="wrap">
+    <div class="head centro surge">
+      <p class="eyebrow">Dúvidas</p>
+      <h2>Perguntas <em>frequentes.</em></h2>
+    </div>
+    <div class="faq">
+      <details class="surge" open><summary>Quanto tempo leva o conserto?</summary><p>O conserto fica pronto em até 24 horas.</p></details>
+      <details class="surge"><summary>O serviço tem garantia?</summary><p>Sim. Todo conserto sai com 1 mês de garantia.</p></details>
+      <details class="surge"><summary>Como peço um orçamento?</summary><p>Pelo WhatsApp da loja mais perto de você. Envie o modelo do aparelho e o defeito, ou use o formulário desta página, que já monta a mensagem.</p></details>
+      <details class="surge"><summary>Quais marcas vocês consertam?</summary><p>iPhone, Samsung, Xiaomi, Motorola, Poco e Realme.</p></details>
+      <details class="surge"><summary>Meu celular caiu na água. O que eu faço?</summary><p>Chame a loja o quanto antes. A Vibe faz banho químico e desoxidação, os serviços indicados para aparelhos que tiveram contato com líquido.</p></details>
+      <details class="surge"><summary>Posso parcelar?</summary><p>Sim, o conserto pode ser parcelado no cartão de crédito.</p></details>
+      <details class="surge"><summary>Como ganho os 5% de desconto?</summary><p>Siga o perfil @vibe.eletronics no Instagram e mostre na loja.</p></details>
+      <details class="surge"><summary>Vocês vendem acessórios?</summary><p>Sim. As lojas vendem capas e acessórios para celular.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Fechamento -->
+<section class="glow fim">
+  <div class="wrap surge">
+    <h2>Seu celular funcionando de novo <em>em até 24 horas.</em></h2>
+    <p class="lead" style="margin-inline:auto">Mande o modelo e o defeito e receba o orçamento da loja mais perto de você.</p>
+    <div class="acoes">
+      <a class="btn wa" href="#orcamento"><svg><use href="#wa"/></svg>Pedir orçamento</a>
+      <a class="btn linha" href="#lojas">Ver as lojas</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Vibe Eletronics · Armação dos Búzios, RJ</span>
+    <nav aria-label="Rodapé">
+      <a href="https://www.instagram.com/vibe.eletronics/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/5522991837583" target="_blank" rel="noopener">SAC</a>
+      <a href="#lojas">Lojas</a>
+      <a href="https://blade0667.github.io/vibe-media-kit/">Media kit</a>
+    </nav>
+  </div>
+</footer>
+
+<a class="flutua" href="#orcamento" aria-label="Pedir orçamento pelo WhatsApp"><svg style="color:#fff"><use href="#wa"/></svg></a>
+
+<script>
+document.documentElement.classList.add("js");
+
+// ---------- Lojas (edite aqui para incluir, tirar ou mudar uma loja) ----------
+const LOJAS = [
+  { nome: "Loja Noi",        bairro: "Centro",     fone: "5522981012426", mapa: "-22.7561717,-41.8883556" },
+  { nome: "Loja Sky",        bairro: "Centro",     fone: "5522981724239", mapa: "-22.7566832,-41.8888317" },
+  { nome: "Loja Pedras",     bairro: "Centro",     fone: "5522997558963" },
+  { nome: "Loja Manguinhos", bairro: "Manguinhos", fone: "5522981724250", mapa: "-22.771125,-41.9122112" },
+  { nome: "Loja Princesa",   bairro: "Manguinhos", fone: "5522981462169", mapa: "-22.7716795,-41.9125966" },
+  { nome: "Loja Fox",        bairro: "Manguinhos", fone: "5522981462163", mapa: "-22.7728478,-41.9133801" },
+];
+const formatar = f => `(${f.slice(2, 4)}) ${f.slice(4, 9)}-${f.slice(9)}`;
+const bairros = [...new Set(LOJAS.map(l => l.bairro))];
+
+// cartões das lojas
+const lista = document.getElementById("lista-lojas");
+for (const bairro of bairros) {
+  const titulo = Object.assign(document.createElement("h3"), { className: "bairro", textContent: bairro });
+  const grade = Object.assign(document.createElement("div"), { className: "g3" });
+  for (const loja of LOJAS.filter(l => l.bairro === bairro)) {
+    const card = document.createElement("div");
+    card.className = "card loja surge";
+    const nome = Object.assign(document.createElement("b"), { textContent: loja.nome });
+    const fone = Object.assign(document.createElement("span"), { className: "fone-n", textContent: formatar(loja.fone) });
+    const acoes = Object.assign(document.createElement("div"), { className: "acoes" });
+    const orc = Object.assign(document.createElement("button"), { type: "button", className: "btn wa mini", textContent: "Orçamento" });
+    orc.addEventListener("click", () => escolherLoja(loja.fone));
+    const zap = Object.assign(document.createElement("a"), { className: "btn linha mini", textContent: "WhatsApp", href: `https://wa.me/${loja.fone}`, target: "_blank", rel: "noopener" });
+    acoes.append(orc, zap);
+    if (loja.mapa) acoes.append(Object.assign(document.createElement("a"), { className: "btn linha mini", textContent: "Mapa", href: `https://www.google.com/maps?q=${loja.mapa}`, target: "_blank", rel: "noopener" }));
+    card.append(nome, fone, acoes);
+    grade.append(card);
+  }
+  lista.append(titulo, grade);
+}
+
+// opções do formulário, agrupadas por bairro
+const select = document.getElementById("f-loja");
+for (const bairro of bairros) {
+  const grupo = Object.assign(document.createElement("optgroup"), { label: bairro });
+  for (const loja of LOJAS.filter(l => l.bairro === bairro))
+    grupo.append(Object.assign(document.createElement("option"), { value: loja.fone, textContent: `${loja.nome} · ${bairro}` }));
+  select.append(grupo);
+}
+function escolherLoja(fone) {
+  select.value = fone;
+  document.getElementById("orcamento").scrollIntoView();
+  document.getElementById("f-nome").focus({ preventScroll: true });
+}
+
+// ---------- Orçamento: monta a mensagem e abre o WhatsApp da loja ----------
+function montarLink() {
+  const loja = LOJAS.find(l => l.fone === select.value);
+  const v = id => document.getElementById(id).value.trim();
+  const texto = `*PRÉ-REGISTRO DE MANUTENÇÃO*\n\n*Loja:* ${loja.nome}\n*Cliente:* ${v("f-nome")}\n*Aparelho:* ${v("f-aparelho")}\n*Defeito relatado:* ${v("f-defeito")}\n\n_Olá! Vim pelo site e gostaria de um orçamento._`;
+  return `https://wa.me/${loja.fone}?text=${encodeURIComponent(texto)}`;
+}
+const form = document.getElementById("form-orc");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+  window.open(montarLink(), "_blank", "noopener");
+});
+
+// ---------- Entrada suave ao rolar ----------
+const itens = document.querySelectorAll(".surge");
+if ("IntersectionObserver" in window) {
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visto"); obs.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  itens.forEach(i => obs.observe(i));
+} else itens.forEach(i => i.classList.add("visto"));
+</script>
+</body>
+</html>
