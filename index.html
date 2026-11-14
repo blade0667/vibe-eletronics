@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Vibe Eletronics · Assistência técnica e eletrônicos em Búzios</title>
-<meta name="description" content="Conserto de celular em até 24h e loja de eletrônicos em Armação dos Búzios, RJ. Busque produtos com preço, monte seu pedido e envie para a loja pelo WhatsApp. 6 lojas no Centro e em Manguinhos.">
+<meta name="description" content="Conserto de celular em até 24h e loja de eletrônicos em Armação dos Búzios, RJ. Veja o preço do conserto e se tem a peça em estoque, e envie o pedido para a loja pelo WhatsApp. 6 lojas no Centro e em Manguinhos.">
 <meta property="og:title" content="Vibe Eletronics · Assistência técnica e eletrônicos em Búzios">
 <meta property="og:description" content="Conserto em até 24h com garantia, e películas, capas, fones, carregadores e mais. Fale com a loja mais perto pelo WhatsApp.">
 <meta property="og:image" content="https://blade0667.github.io/vibe-eletronics/img/og.jpg">
@@ -77,6 +77,7 @@ em { font-style: normal; color: var(--mint); }
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   padding: 15px 26px; border-radius: 999px; border: 2px solid transparent;
   font: 800 16px/1 "Montserrat", sans-serif; text-decoration: none; cursor: pointer; white-space: nowrap;
+  background-origin: border-box;
   transition: transform .15s, box-shadow .15s, background .15s;
 }
 .btn svg { width: 20px; height: 20px; flex: none; }
@@ -84,7 +85,7 @@ em { font-style: normal; color: var(--mint); }
 .btn.cheio { background: var(--mint); color: var(--bg1); box-shadow: 0 10px 32px rgba(79,240,210,.3); }
 .btn.linha { border-color: rgba(79,240,210,.55); color: #fff; background: transparent; }
 .btn.linha:hover { background: rgba(79,240,210,.12); }
-.btn.wa { background: linear-gradient(90deg, #25d366, #128c7e); color: #fff; box-shadow: 0 10px 30px rgba(37,211,102,.28); }
+.btn.wa { background: linear-gradient(90deg, #25d366, #128c7e) border-box; color: #fff; box-shadow: 0 10px 30px rgba(37,211,102,.28); }
 .btn.mini { padding: 10px 16px; font-size: 13.5px; }
 .btn.largo { width: 100%; }
 
@@ -165,37 +166,66 @@ em { font-style: normal; color: var(--mint); }
 .cat p { margin: 6px 0 16px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
 .cat .btn { margin-top: auto; }
 
-/* ---------- Loja: busca, resultados e carrinho ---------- */
+/* ---------- Preços de conserto (estilo da Dashboard das Lojas) ---------- */
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.busca { position: relative; display: flex; align-items: center; margin-bottom: 16px; }
+.painel { padding: clamp(16px, 2.4vw, 26px); border-radius: 26px; background: rgba(11,5,32,.6); border: 1.5px solid var(--line); }
+.busca { position: relative; display: flex; align-items: center; margin-bottom: 14px; }
 .busca > svg { position: absolute; left: 20px; width: 22px; height: 22px; color: var(--mint); pointer-events: none; }
-.busca input { padding: 18px 56px; border-radius: 999px; font-size: 17px; background: rgba(11,5,32,.6); border-width: 2px; }
+.busca input { padding: 17px 56px; border-radius: 16px; font-size: 17px; background: rgba(255,255,255,.06); border-width: 2px; }
 .busca input::-webkit-search-cancel-button { display: none; }
-.busca button { position: absolute; right: 10px; width: 40px; height: 40px; border: 0; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.1); color: #fff; cursor: pointer; }
+.busca button { position: absolute; right: 10px; width: 40px; height: 40px; border: 0; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.1); color: #fff; cursor: pointer; }
 .busca button svg { width: 18px; height: 18px; }
-.chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; scrollbar-width: thin; scrollbar-color: rgba(79,240,210,.45) transparent; }
-.chips button { flex: none; padding: 9px 15px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--glass); color: var(--muted); font: 700 14px/1 "Montserrat", sans-serif; cursor: pointer; white-space: nowrap; }
-.chips button small { font-weight: 600; opacity: .75; margin-left: 4px; }
-.chips button[aria-pressed="true"] { background: var(--mint); border-color: var(--mint); color: var(--bg1); }
-.chips button:hover { border-color: var(--mint); }
-.info { margin: 6px 0 22px; font-size: 14px; color: var(--muted); }
-.info b { color: #fff; }
-.resultados { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-.prod { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; padding: 16px 18px; border-radius: 18px; background: rgba(11,5,32,.5); border: 1.5px solid var(--line); }
-.prod.no-carrinho { border-color: rgba(79,240,210,.7); }
-.prod .p-cat { display: block; font: 600 12px/1.2 "Oswald", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--mint); margin-bottom: 4px; }
-.prod b { display: block; font-size: 15.5px; font-weight: 700; line-height: 1.35; }
-.prod mark { background: rgba(79,240,210,.22); color: inherit; border-radius: 3px; }
-.p-pe { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.p-pe strong { font-size: 20px; font-weight: 900; font-variant-numeric: tabular-nums; }
-.qtd { display: inline-flex; align-items: center; border-radius: 999px; background: var(--mint); color: var(--bg1); }
-.qtd button { width: 38px; height: 38px; border: 0; background: none; color: inherit; font: 900 20px/1 "Montserrat", sans-serif; cursor: pointer; border-radius: 50%; }
-.qtd button:hover { background: rgba(28,14,64,.12); }
-.qtd output { min-width: 22px; text-align: center; font-weight: 900; font-variant-numeric: tabular-nums; }
-.vazio { padding: 24px; text-align: center; display: grid; gap: 8px; justify-items: center; }
+.abas { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; scrollbar-width: thin; scrollbar-color: rgba(79,240,210,.45) transparent; }
+.abas button { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--glass); color: var(--muted); font: 700 14px/1 "Montserrat", sans-serif; cursor: pointer; white-space: nowrap; }
+.abas button svg { width: 18px; height: 18px; }
+.abas button small { font-weight: 700; padding: 3px 7px; border-radius: 999px; background: rgba(255,255,255,.1); font-size: 12px; }
+.abas button small:empty { display: none; }
+.abas button[aria-pressed="true"] { background: var(--mint); border-color: var(--mint); color: var(--bg1); }
+.abas button[aria-pressed="true"] small { background: rgba(28,14,64,.15); }
+.abas button:hover { border-color: var(--mint); }
+.info { margin: 6px 2px 14px; font-size: 14px; color: var(--muted); }
+
+.cabeca, .peca { display: grid; grid-template-columns: 112px 110px minmax(0, 1fr) 118px 132px 118px; align-items: center; gap: 12px; }
+.cabeca { padding: 0 16px 8px; font: 600 12px/1 "Oswald", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid rgba(255,255,255,.08); }
+.cabeca span:nth-child(4), .cabeca span:nth-child(5) { text-align: center; }
+.linhas { list-style: none; display: grid; }
+.peca { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.peca:hover { background: rgba(255,255,255,.035); }
+.peca.escolhida { background: rgba(79,240,210,.08); }
+.l-marca { font-weight: 800; color: var(--mint); font-size: 15px; }
+.l-modelo { min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.l-modelo b { font-weight: 700; font-size: 15.5px; line-height: 1.3; }
+.l-modelo mark { background: rgba(79,240,210,.25); color: inherit; border-radius: 3px; }
+.l-compat { font-size: 12.5px; color: var(--muted); padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); }
+.l-preco, .l-disp { justify-self: center; }
+.peca .btn { justify-self: end; min-width: 108px; }
+.tipo-tag { display: inline-flex; align-items: center; justify-content: center; gap: 5px; padding: 5px 9px; border-radius: 8px; font: 800 11.5px/1 "Montserrat", sans-serif; text-transform: uppercase; letter-spacing: .03em; border: 1px solid; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.t-incell { color: #7cc4ff; background: rgba(56,140,255,.16); border-color: rgba(56,140,255,.55); }
+.t-oled { color: #d4b4ff; background: rgba(168,85,247,.18); border-color: rgba(168,85,247,.6); }
+.t-vivid { color: #ff9fd0; background: rgba(236,72,153,.16); border-color: rgba(236,72,153,.55); }
+.t-frontal { color: #e2e8f0; background: rgba(148,163,184,.16); border-color: rgba(148,163,184,.5); }
+.t-traseira { color: #5eead4; background: rgba(20,184,166,.16); border-color: rgba(20,184,166,.6); }
+.t-vidro { color: #67e8f9; background: rgba(34,211,238,.14); border-color: rgba(34,211,238,.55); }
+.t-bateria { color: #fcd34d; background: rgba(245,158,11,.16); border-color: rgba(245,158,11,.6); }
+.t-dock { color: #7dd3fc; background: rgba(14,165,233,.16); border-color: rgba(14,165,233,.55); }
+.cor-tag { padding: 3px 8px; border-radius: 6px; font: 800 11px/1.2 "Montserrat", sans-serif; text-transform: uppercase; border: 1px solid; }
+.preco-pill { padding: 6px 12px; border-radius: 10px; background: rgba(79,240,210,.12); border: 1px solid rgba(79,240,210,.45); color: #fff; font-weight: 900; font-size: 15.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.preco-pill.consultar { background: none; border-color: rgba(255,255,255,.2); color: var(--muted); font-weight: 700; font-size: 13px; }
+.disp { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 800; white-space: nowrap; }
+.disp::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.disp.tem { color: #34d399; background: rgba(16,185,129,.14); }
+.disp.falta { color: #fbbf24; background: rgba(245,158,11,.14); }
+.btn.escolhido { background: rgba(79,240,210,.14); color: var(--mint); border-color: rgba(79,240,210,.6); box-shadow: none; }
+@media (max-width: 900px) {
+  .cabeca { display: none; }
+  .peca { grid-template-columns: auto 1fr auto; grid-template-areas: "tipo marca disp" "modelo modelo modelo" "preco preco botao"; gap: 10px 10px; padding: 14px 6px; }
+  .l-tipo { grid-area: tipo; } .l-marca { grid-area: marca; } .l-disp { grid-area: disp; justify-self: end; }
+  .l-modelo { grid-area: modelo; } .l-preco { grid-area: preco; justify-self: start; } .peca .btn { grid-area: botao; }
+}
+.vazio { padding: 26px 16px; text-align: center; display: grid; gap: 8px; justify-items: center; }
 .vazio p { color: var(--muted); font-size: 15px; }
-.mais { display: flex; justify-content: center; margin-top: 22px; }
-.mais:empty, .mais:has(> [hidden]:only-child) { margin: 0; }
+.mais { display: flex; justify-content: center; margin-top: 18px; }
+.mais:has(> [hidden]:only-child) { margin: 0; }
 
 .carrinho-btn { position: relative; width: 46px; height: 46px; flex: none; border-radius: 50%; border: 1.5px solid var(--line); background: var(--glass); color: #fff; display: grid; place-items: center; cursor: pointer; }
 .carrinho-btn svg { width: 24px; height: 24px; }
@@ -225,16 +255,13 @@ body:has(.gaveta[open]) { overflow: hidden; }
 .fechar svg { width: 20px; height: 20px; }
 .gaveta-corpo { flex: 1; overflow-y: auto; padding: 18px 22px 26px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-content: start; }
 .gaveta .btn { white-space: normal; text-align: center; }
-.carrinho-vazio { color: var(--muted); }
-.carrinho-vazio[hidden] { display: none; }
 .itens { list-style: none; display: grid; gap: 10px; }
-.item { display: grid; grid-template-columns: 1fr auto; gap: 10px 12px; align-items: center; padding: 14px; border-radius: 16px; background: var(--glass); border: 1.5px solid var(--line); }
+.item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; padding: 14px; border-radius: 16px; background: var(--glass); border: 1.5px solid var(--line); }
 .item b { font-size: 14.5px; font-weight: 700; line-height: 1.35; }
-.item .i-preco { grid-column: 1; font-size: 13.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.item .i-sub { grid-column: 2; grid-row: 1; justify-self: end; font-weight: 900; font-variant-numeric: tabular-nums; }
-.item .qtd { grid-column: 2; justify-self: end; }
+.item .i-sub { justify-self: end; font-weight: 900; font-variant-numeric: tabular-nums; }
+.item .i-info { font-size: 13px; color: var(--muted); }
+.item .i-tirar { justify-self: end; border: 0; background: none; color: var(--muted); font: 700 13px "Montserrat", sans-serif; text-decoration: underline; cursor: pointer; }
 #form-pedido { display: grid; gap: 14px; }
-#form-pedido[hidden] { display: none; }
 #form-pedido small { font-weight: 500; color: var(--muted); }
 .total { display: flex; align-items: baseline; justify-content: space-between; padding: 4px 2px 6px; border-bottom: 1px solid rgba(255,255,255,.1); }
 .total span { font-weight: 700; color: var(--muted); }
@@ -352,13 +379,13 @@ footer a:hover { color: #fff; }
       <span>VIBE<small>ELETRONICS</small></span>
     </a>
     <nav aria-label="Seções">
-      <a href="#produtos">Produtos</a>
+      <a href="#precos">Preços</a>
       <a href="#servicos">Assistência</a>
-      <a href="#como-funciona">Como funciona</a>
+      <a href="#produtos">Produtos</a>
       <a href="#lojas">Lojas</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
-    <button class="carrinho-btn" type="button" id="abrir-carrinho" aria-label="Abrir carrinho, vazio">
+    <button class="carrinho-btn" type="button" id="abrir-carrinho" aria-label="Abrir pedido de conserto, vazio">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.5l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.3"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17.5" cy="20" r="1.4"/></svg>
       <span class="badge" id="badge" hidden>0</span>
     </button>
@@ -377,7 +404,7 @@ footer a:hover { color: #fff; }
       <p class="lead">A Vibe Eletronics conserta seu celular com <b>1 mês de garantia</b> e vende películas, capas, fones, carregadores, cabos, celulares e muito mais em <b>6 lojas em Armação dos Búzios</b>.</p>
       <div class="acoes">
         <a class="btn wa" href="#orcamento"><svg><use href="#wa"/></svg>Pedir orçamento</a>
-        <a class="btn linha" href="#produtos">Ver produtos e preços</a>
+        <a class="btn linha" href="#precos">Ver preços de conserto</a>
       </div>
       <ul class="selos">
         <li>Conserto em até 24h</li>
@@ -415,51 +442,6 @@ footer a:hover { color: #fff; }
   </div>
 </div>
 
-<!-- Produtos (categorias do sistema das lojas) -->
-<section id="produtos" class="glow">
-  <div class="wrap">
-    <div class="head surge">
-      <p class="eyebrow">Produtos</p>
-      <h2>Muito além <em>do conserto.</em></h2>
-      <p class="lead">Busque, veja o preço e monte seu pedido. Você escolhe a loja e envia o <b>pré-pedido pelo WhatsApp</b>; a loja confirma a disponibilidade e o valor antes de separar.</p>
-    </div>
-
-    <div class="busca surge" role="search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
-      <label class="sr" for="q">Buscar produto</label>
-      <input id="q" type="search" placeholder="Busque: película A34, fone JBL, cabo USB-C…" autocomplete="off" enterkeyhint="search">
-      <button type="button" id="limpar-busca" aria-label="Limpar busca" hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-    <div class="chips" id="chips" aria-label="Filtrar por categoria"></div>
-    <p class="info" id="info" aria-live="polite">Carregando produtos…</p>
-
-    <div class="g4" id="vitrine">
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="12" height="20" rx="2.5"/><path d="M4 6v14a2 2 0 0 0 2 2M10.5 7.5l2-2M10.5 11l5-5"/></svg><b>Películas</b><p>De vidro, cerâmica, hidrogel e 5D para Samsung, Motorola, iPhone, Xiaomi e LG.</p><button class="btn linha mini" type="button" data-ver="Películas">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><rect x="8.5" y="4.5" width="4.5" height="4.5" rx="1.2"/></svg><b>Capas &amp; Cases</b><p>Silicone, transparente, magnética e carteira. Capas à prova d'água e cases para GoPro e HD.</p><button class="btn linha mini" type="button" data-ver="Capas &amp; Cases">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg><b>Áudio &amp; Fones</b><p>Fones Bluetooth e com fio, headphones, headsets e caixas de som, incluindo JBL.</p><button class="btn linha mini" type="button" data-ver="Áudio &amp; Fones">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L5 13.5h6L10 22l9-12h-6.5z"/></svg><b>Fontes &amp; Carregadores</b><p>Carregadores USB-C de até 65 W, veiculares, fontes de notebook e power banks.</p><button class="btn linha mini" type="button" data-ver="Fontes &amp; Carregadores">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5M9 7V2M15 7V2M7 7h10v5a5 5 0 0 1-10 0z"/></svg><b>Cabos &amp; Adaptadores</b><p>USB-C, iPhone, HDMI e P2, além de adaptadores e hubs USB.</p><button class="btn linha mini" type="button" data-ver="Cabos &amp; Adaptadores">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 18.5h3"/></svg><b>Celulares &amp; Tablets</b><p>Aparelhos Motorola, Xiaomi, Samsung e LG, do básico ao smartphone.</p><button class="btn linha mini" type="button" data-ver="Celulares &amp; Tablets">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><b>Informática &amp; TV</b><p>Mouses, teclados, pendrives, cartões de memória, roteadores e controles de TV e de videogame.</p><button class="btn linha mini" type="button" data-ver="Informática &amp; TV">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="5" width="10" height="17" rx="2"/><path d="M10 5V2.5h4V5M10 12h4M12 10v4M10.5 17.5h3"/></svg><b>Pilhas &amp; Baterias</b><p>Pilhas alcalinas e recarregáveis, baterias tipo moeda, 9V e 23A.</p><button class="btn linha mini" type="button" data-ver="Pilhas &amp; Baterias">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1.2 12.2a1.6 1.6 0 0 1-1.6 1.8H6.4a1.6 1.6 0 0 1-1.6-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><b>Acessórios &amp; Geral</b><p>Suportes de celular e veiculares, acessórios para GoPro, smartwatches, ring lights e tripés.</p><button class="btn linha mini" type="button" data-ver="Acessórios &amp; Geral">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="14.5" r="3.5"/><circle cx="17.5" cy="14.5" r="3.5"/><path d="M10 14.5a2 2 0 0 1 4 0M3 14l2-7M21 14l-2-7"/></svg><b>Óculos &amp; Ótica</b><p>Óculos de sol, polarizados, de grau prontos e de natação.</p><button class="btn linha mini" type="button" data-ver="Óculos &amp; Ótica">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5.5"/><path d="M7 11v3M5.5 12.5h3M15.5 11.5v.01M18 13.5v.01"/></svg><b>Games &amp; Brinquedos</b><p>Brinquedos, jogos, baralhos e livros de colorir para as crianças.</p><button class="btn linha mini" type="button" data-ver="Games &amp; Brinquedos">Ver produtos</button></article>
-      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1.5 13h-9zM5 8h14M9 8l1-5h4l1 5"/></svg><b>Praia &amp; Térmicos</b><p>Copos, canecas e garrafas térmicas, cadeiras, cangas, bodyboard e frescobol.</p><button class="btn linha mini" type="button" data-ver="Praia &amp; Térmicos">Ver produtos</button></article>
-    </div>
-
-    <ul class="resultados" id="resultados" hidden></ul>
-    <div class="vazio card" id="vazio" hidden>
-      <b>Não achamos esse produto no site.</b>
-      <p>Nem tudo o que as lojas têm está aqui. Pergunte direto para a loja.</p>
-      <button class="btn linha mini" type="button" id="perguntar">Perguntar para a loja</button>
-    </div>
-    <div class="mais"><button class="btn linha" type="button" id="mostrar-mais" hidden>Mostrar mais</button></div>
-  </div>
-</section>
-
 <!-- Serviços -->
 <section id="servicos" class="escuro">
   <div class="wrap">
@@ -476,6 +458,69 @@ footer a:hover { color: #fff; }
       <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.800 3h10.400a2 2 0 0 0 1.800-3l-5-9V3M7.500 15h9"/></svg><b>Desoxidação</b><p>Remoção da oxidação da placa depois do contato com líquido.</p></div>
       <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.800 4.700L18.500 9.500l-4.700 1.800L12 16l-1.800-4.700L5.500 9.500l4.700-1.800zM19 15l.800 2.200L22 18l-2.200.800L19 21l-.800-2.200L16 18l2.200-.800zM5 15.500l.600 1.600 1.600.600-1.600.600L5 20l-.600-1.700-1.600-.600 1.600-.600z"/></svg><b>Limpeza interna</b><p>Poeira e sujeira em alto-falante, microfone e entradas.</p></div>
       <div class="card servico surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M10 9.500l-2.500 2.500 2.500 2.500M14 9.500l2.500 2.500-2.500 2.500"/></svg><b>Software e vírus</b><p>Sistema travando, lento ou com vírus.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Preços de conserto: estoque de peças lido ao vivo do sistema das lojas -->
+<section id="precos" class="glow">
+  <div class="wrap">
+    <div class="head surge">
+      <p class="eyebrow">Preços de conserto</p>
+      <h2>Veja o preço <em>e se tem a peça.</em></h2>
+      <p class="lead">Busque pelo modelo do seu celular. O valor já inclui a <b>peça e a mão de obra</b>, e o estoque vem direto do sistema das lojas. Escolha o conserto e envie o pedido para a loja pelo WhatsApp.</p>
+    </div>
+
+    <div class="painel surge">
+      <div class="busca" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        <label class="sr" for="q">Buscar peça pelo modelo</label>
+        <input id="q" type="search" placeholder="Modelo, marca, cor ou compatibilidade… Ex.: A54, iPhone 11" autocomplete="off" enterkeyhint="search">
+        <button type="button" id="limpar-busca" aria-label="Limpar busca" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="abas" id="abas" aria-label="Tipo de peça">
+        <button type="button" data-aba="todas" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Todas<small data-conta="todas"></small></button>
+        <button type="button" data-aba="frontal" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 6l2 3-2 2 3 3-1 3"/></svg>Frontais<small data-conta="frontal"></small></button>
+        <button type="button" data-aba="traseira" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><rect x="8.5" y="4.5" width="4.5" height="4.5" rx="1.2"/></svg>Traseiras e vidros<small data-conta="traseira"></small></button>
+        <button type="button" data-aba="bateria" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="17" height="10" rx="2.5"/><path d="M22 10.5v3M11.5 9.5l-2.5 3h3l-2.5 3"/></svg>Baterias<small data-conta="bateria"></small></button>
+        <button type="button" data-aba="dock" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0zM12 17v5"/></svg>Conectores<small data-conta="dock"></small></button>
+      </div>
+      <p class="info" id="info" aria-live="polite">Carregando o estoque…</p>
+      <div class="cabeca" aria-hidden="true"><span>Tipo</span><span>Marca</span><span>Modelo e cor</span><span>Preço</span><span>Estoque</span><span></span></div>
+      <ul class="linhas" id="resultados"></ul>
+      <div class="vazio" id="vazio" hidden>
+        <b>Não achamos essa peça na tabela.</b>
+        <p>Nem todo modelo está aqui. Pergunte direto para a loja.</p>
+        <button class="btn linha mini" type="button" id="perguntar">Perguntar para a loja</button>
+      </div>
+      <div class="mais"><button class="btn linha" type="button" id="mostrar-mais" hidden>Mostrar mais</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- Produtos de loja (só informação; consulta pelo WhatsApp) -->
+<section id="produtos" class="escuro">
+  <div class="wrap">
+    <div class="head surge">
+      <p class="eyebrow">Produtos</p>
+      <h2>Muito além <em>do conserto.</em></h2>
+      <p class="lead">São mais de 1.000 produtos nas lojas. A disponibilidade varia de uma loja para outra: toque em <b>Consultar</b> e pergunte pelo WhatsApp antes de ir.</p>
+    </div>
+    <div class="g4">
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="12" height="20" rx="2.5"/><path d="M4 6v14a2 2 0 0 0 2 2M10.5 7.5l2-2M10.5 11l5-5"/></svg><b>Películas</b><p>De vidro, cerâmica, hidrogel e 5D para Samsung, Motorola, iPhone, Xiaomi e LG.</p><button class="btn linha mini" type="button" data-cat="Películas">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><rect x="8.5" y="4.5" width="4.5" height="4.5" rx="1.2"/></svg><b>Capas &amp; Cases</b><p>Silicone, transparente, magnética e carteira. Capas à prova d'água e cases para GoPro e HD.</p><button class="btn linha mini" type="button" data-cat="Capas &amp; Cases">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg><b>Áudio &amp; Fones</b><p>Fones Bluetooth e com fio, headphones, headsets e caixas de som, incluindo JBL.</p><button class="btn linha mini" type="button" data-cat="Áudio &amp; Fones">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L5 13.5h6L10 22l9-12h-6.5z"/></svg><b>Fontes &amp; Carregadores</b><p>Carregadores USB-C de até 65 W, veiculares, fontes de notebook e power banks.</p><button class="btn linha mini" type="button" data-cat="Fontes &amp; Carregadores">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5M9 7V2M15 7V2M7 7h10v5a5 5 0 0 1-10 0z"/></svg><b>Cabos &amp; Adaptadores</b><p>USB-C, iPhone, HDMI e P2, além de adaptadores e hubs USB.</p><button class="btn linha mini" type="button" data-cat="Cabos &amp; Adaptadores">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 18.5h3"/></svg><b>Celulares &amp; Tablets</b><p>Aparelhos Motorola, Xiaomi, Samsung e LG, do básico ao smartphone.</p><button class="btn linha mini" type="button" data-cat="Celulares &amp; Tablets">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><b>Informática &amp; TV</b><p>Mouses, teclados, pendrives, cartões de memória, roteadores e controles de TV e de videogame.</p><button class="btn linha mini" type="button" data-cat="Informática &amp; TV">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="5" width="10" height="17" rx="2"/><path d="M10 5V2.5h4V5M10 12h4M12 10v4M10.5 17.5h3"/></svg><b>Pilhas &amp; Baterias</b><p>Pilhas alcalinas e recarregáveis, baterias tipo moeda, 9V e 23A.</p><button class="btn linha mini" type="button" data-cat="Pilhas &amp; Baterias">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1.2 12.2a1.6 1.6 0 0 1-1.6 1.8H6.4a1.6 1.6 0 0 1-1.6-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg><b>Acessórios &amp; Geral</b><p>Suportes de celular e veiculares, acessórios para GoPro, smartwatches, ring lights e tripés.</p><button class="btn linha mini" type="button" data-cat="Acessórios &amp; Geral">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="14.5" r="3.5"/><circle cx="17.5" cy="14.5" r="3.5"/><path d="M10 14.5a2 2 0 0 1 4 0M3 14l2-7M21 14l-2-7"/></svg><b>Óculos &amp; Ótica</b><p>Óculos de sol, polarizados, de grau prontos e de natação.</p><button class="btn linha mini" type="button" data-cat="Óculos &amp; Ótica">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5.5"/><path d="M7 11v3M5.5 12.5h3M15.5 11.5v.01M18 13.5v.01"/></svg><b>Games &amp; Brinquedos</b><p>Brinquedos, jogos, baralhos e livros de colorir para as crianças.</p><button class="btn linha mini" type="button" data-cat="Games &amp; Brinquedos">Consultar</button></article>
+      <article class="card cat surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1.5 13h-9zM5 8h14M9 8l1-5h4l1 5"/></svg><b>Praia &amp; Térmicos</b><p>Copos, canecas e garrafas térmicas, cadeiras, cangas, bodyboard e frescobol.</p><button class="btn linha mini" type="button" data-cat="Praia &amp; Térmicos">Consultar</button></article>
     </div>
   </div>
 </section>
@@ -599,9 +644,11 @@ footer a:hover { color: #fff; }
       <details class="surge"><summary>Meu celular caiu na água. O que eu faço?</summary><p>Chame a loja o quanto antes. A Vibe faz banho químico e desoxidação, os serviços indicados para aparelhos que tiveram contato com líquido.</p></details>
       <details class="surge"><summary>Posso parcelar?</summary><p>Sim, o conserto pode ser parcelado no cartão de crédito.</p></details>
       <details class="surge"><summary>Como ganho os 5% de desconto?</summary><p>Siga o perfil @vibe.eletronics no Instagram e mostre na loja.</p></details>
-      <details class="surge"><summary>Como funciona o pré-pedido pelo site?</summary><p>Busque os produtos, adicione ao carrinho, escolha a loja e toque em enviar. O seu WhatsApp abre com a lista pronta para a loja. Ela confirma se tem tudo e o valor final, e você retira na loja.</p></details>
-      <details class="surge"><summary>Os preços do site são os mesmos da loja?</summary><p>São os preços do catálogo das lojas na data indicada na busca. Preços e estoque podem mudar, por isso a loja confirma tudo pelo WhatsApp antes de separar o pedido.</p></details>
-      <details class="surge"><summary>Não achei o produto que eu queria. E agora?</summary><p>Nem tudo o que as lojas têm está no site. Use o formulário de consulta ou chame a loja pelo WhatsApp e pergunte.</p></details>
+      <details class="surge"><summary>O que vocês vendem além do conserto?</summary><p>Películas, capas, fones e caixas de som, carregadores, cabos, pilhas, celulares, itens de informática, óculos, brinquedos e produtos de praia. A disponibilidade varia de loja para loja: consulte pelo WhatsApp antes de ir.</p></details>
+      <details class="surge"><summary>Como vejo o preço do conserto?</summary><p>Na tabela de preços, busque pelo modelo do seu celular. O valor mostrado já inclui a peça e a mão de obra. Toque em Escolher, informe a loja e envie o pedido pelo WhatsApp.</p></details>
+      <details class="surge"><summary>A tabela de preços é atualizada?</summary><p>Sim. Ela é lida do sistema das lojas e se atualiza a cada poucos minutos. Mesmo assim, a loja confirma o valor antes do conserto.</p></details>
+      <details class="surge"><summary>O que quer dizer "sob encomenda"?</summary><p>A peça não está no estoque agora. A loja encomenda e informa o prazo pelo WhatsApp.</p></details>
+      <details class="surge"><summary>Não achei o meu modelo. E agora?</summary><p>Nem todo modelo está na tabela. Use o formulário de orçamento ou chame a loja pelo WhatsApp.</p></details>
     </div>
   </div>
 </section>
@@ -613,7 +660,7 @@ footer a:hover { color: #fff; }
     <p class="lead" style="margin-inline:auto">Peça o orçamento do conserto ou consulte um produto na loja mais perto de você.</p>
     <div class="acoes">
       <a class="btn wa" href="#orcamento"><svg><use href="#wa"/></svg>Pedir orçamento</a>
-      <a class="btn linha" href="#produtos">Ver produtos</a>
+      <a class="btn linha" href="#precos">Ver preços</a>
     </div>
   </div>
 </section>
@@ -636,24 +683,24 @@ footer a:hover { color: #fff; }
 
 <button class="pilula" type="button" id="pilula" hidden>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.5l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.3"/><circle cx="9.5" cy="20" r="1.4"/><circle cx="17.5" cy="20" r="1.4"/></svg>
-  <span><b>Ver carrinho</b> · <span id="pilula-txt"></span></span>
+  <span><b>Ver pedido</b> · <span id="pilula-txt"></span></span>
 </button>
 
 <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
 
 <dialog class="gaveta" id="carrinho" aria-labelledby="carrinho-titulo">
   <div class="gaveta-topo">
-    <h2 id="carrinho-titulo">Seu pedido</h2>
-    <button type="button" class="fechar" id="fechar-carrinho" aria-label="Fechar carrinho">
+    <h2 id="carrinho-titulo">Pedido de conserto</h2>
+    <button type="button" class="fechar" id="fechar-carrinho" aria-label="Fechar pedido">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
   <div class="gaveta-corpo">
-    <p class="carrinho-vazio" id="carrinho-vazio">Seu carrinho está vazio. Busque um produto e toque em <b>Adicionar</b>.</p>
+    <p class="carrinho-vazio" id="carrinho-vazio">Nenhum conserto escolhido. Busque o modelo do seu celular na tabela de preços e toque em <b>Escolher</b>.</p>
     <ul class="itens" id="itens"></ul>
     <form id="form-pedido" novalidate hidden>
-      <div class="total"><span>Total estimado</span><strong id="total">R$ 0,00</strong></div>
-      <label>Loja para retirar
+      <div class="total"><span>Total</span><strong id="total">R$ 0,00</strong></div>
+      <label>Loja para fazer o conserto
         <select id="p-loja" required>
           <option value="" disabled selected>Escolha a loja</option>
         </select>
@@ -662,11 +709,11 @@ footer a:hover { color: #fff; }
         <input id="p-nome" type="text" autocomplete="given-name" placeholder="Como podemos te chamar?" required>
       </label>
       <label><span>Observação <small>(opcional)</small></span>
-        <textarea id="p-obs" rows="2" placeholder="Ex.: película para o modelo A34 5G"></textarea>
+        <textarea id="p-obs" rows="2" placeholder="Ex.: a tela está com manchas e sem toque"></textarea>
       </label>
-      <button class="btn wa largo" type="submit"><svg><use href="#wa"/></svg>Enviar pré-pedido pelo WhatsApp</button>
-      <p class="nota" id="nota-precos">A loja confirma a disponibilidade e o valor antes de separar.</p>
-      <button class="limpar" type="button" id="limpar-carrinho">Esvaziar carrinho</button>
+      <button class="btn wa largo" type="submit"><svg><use href="#wa"/></svg>Enviar pedido pelo WhatsApp</button>
+      <p class="nota" id="nota-precos">A loja confirma o valor e combina quando você leva o aparelho.</p>
+      <button class="limpar" type="button" id="limpar-carrinho">Limpar pedido</button>
     </form>
   </div>
 </dialog>
@@ -763,239 +810,270 @@ form.addEventListener("submit", e => {
   window.open(montarLink(), "_blank", "noopener");
 });
 
-// ================== LOJA: busca de produtos, carrinho e pré-pedido ==================
-// Os produtos vêm do catalogo.json (gerado por ferramentas/exportar_catalogo.py).
+// ================== PREÇOS DE CONSERTO: estoque de peças, busca e pedido ==================
+// O estoque vem do Apps Script "estoque-site" (pasta Dashboard lojas), que lê a mesma
+// planilha da Dashboard das Lojas e devolve só tipo, marca, modelo, cor, preço e se tem a peça.
+const ESTOQUE_URL = "https://script.google.com/macros/s/AKfycbyTQ11tquv4RKvYI2ue999oTxPDMrxZfyVfuZ1CyjdpMciVifI0d6WumSWtDzNC-lTQKA/exec";
+
 const $ = id => document.getElementById(id);
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 const reais = centavos => brl.format(centavos / 100);
-const POR_PAGINA = 24;
-let CAT = [], PROD = [], porCodigo = new Map(), dataCatalogo = "";
-let filtro = { q: "", cat: -1 }, mostrando = POR_PAGINA, achados = [];
+const POR_PAGINA = 30;
+const NOME_ABA = { frontal: "Frontal", traseira: "Traseira", bateria: "Bateria", dock: "Conector" };
+let PECAS = [], porId = new Map(), atualizado = "";
+let filtro = { q: "", aba: "todas" }, mostrando = POR_PAGINA;
 
-// texto normalizado para busca: sem acento, minúsculo, sinônimos de USB-C juntos
-const norm = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-  .replace(/[-/+.,()]/g, " ").replace(/\b(type|tipo|usb)\s?c\b|\btpc\b/g, "typec")
-  .replace(/\s+/g, " ").trim();
+const tira = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const norm = t => tira(t).replace(/[-/+.,()]/g, " ").replace(/\s+/g, " ").trim();
 const singular = w => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss")) ? w.slice(0, -1) : w;
+const termosDe = q => norm(q).split(" ").filter(Boolean).map(singular);
 
-// ---- carrinho guardado no navegador (só neste aparelho) ----
-let carrinho = new Map();
-try { carrinho = new Map(JSON.parse(localStorage.getItem("vibe-carrinho") || "[]")); } catch { carrinho = new Map(); }
-const salvar = () => { try { localStorage.setItem("vibe-carrinho", JSON.stringify([...carrinho])); } catch {} };
-
-async function carregarCatalogo() {
-  try {
-    const resp = await fetch("catalogo.json", { cache: "no-cache" });
-    if (!resp.ok) throw new Error(resp.status);
-    const dados = await resp.json();
-    CAT = dados.categorias;
-    PROD = dados.produtos.map(([codigo, nome, cat, preco]) => ({ codigo, nome, cat, centavos: Math.round(preco * 100), busca: norm(nome + " " + dados.categorias[cat]) }));
-    porCodigo = new Map(PROD.map(p => [p.codigo, p]));
-    dataCatalogo = dados.atualizado.split("-").reverse().join("/");
-    for (const c of [...carrinho.keys()]) if (!porCodigo.has(c)) carrinho.delete(c); // some o que saiu do catálogo
-    salvar();
-    $("nota-precos").textContent = `Preços do catálogo de ${dataCatalogo}. A loja confirma a disponibilidade e o valor antes de separar.`;
-    montarChips();
-    atualizar();
-    atualizarCarrinho();
-  } catch (e) {
-    $("info").innerHTML = "Não foi possível carregar os produtos agora. Use <b>Ver produtos</b> numa categoria para perguntar pelo WhatsApp.";
-    document.querySelectorAll("[data-ver]").forEach(b => { b.textContent = "Consultar"; b.onclick = () => consultarProduto(b.dataset.ver + ": "); });
+// rótulo do tipo, no padrão da dashboard (Incell, OLED, Vivid, Traseira, Vidro, Bateria, Dock)
+function tipoDe(p) {
+  const t = tira(p.tipo);
+  if (p.cat === "frontal") {
+    if (t.includes("incell")) return ["Incell", "t-incell"];
+    if (t.includes("oled")) return ["OLED", "t-oled"];
+    if (t.includes("vivid")) return ["Vivid", "t-vivid"];
+    return [p.tipo || "Frontal", "t-frontal"];
   }
+  if (p.cat === "traseira") return t.includes("vidro") ? ["Vidro", "t-vidro"] : ["Traseira", "t-traseira"];
+  if (p.cat === "bateria") return ["Bateria", "t-bateria"];
+  return ["Dock", "t-dock"];
+}
+// nome do serviço que vai na mensagem
+function servicoDe(p) {
+  const [tipo] = tipoDe(p);
+  const cor = p.cor ? ` (${p.cor})` : "";
+  if (p.cat === "frontal") return `Troca de frontal ${tipo === "Frontal" ? "" : tipo + " "}${p.marca} ${p.modelo}${cor}`.replace(/\s+/g, " ");
+  if (p.cat === "traseira") return `Troca de ${tipo === "Vidro" ? "vidro" : "traseira"} ${p.marca} ${p.modelo}${cor}`;
+  if (p.cat === "bateria") return `Troca de bateria ${p.marca} ${p.modelo}${p.compat ? ` (${p.compat})` : ""}`;
+  return `Troca de conector de carga ${p.marca} ${p.modelo}`;
 }
 
-function montarChips() {
-  const chips = $("chips");
-  const contagem = CAT.map((_, i) => PROD.filter(p => p.cat === i).length);
-  const botao = (rotulo, i, n) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.dataset.i = i; b.setAttribute("aria-pressed", "false");
-    b.append(rotulo);
-    if (n != null) b.append(Object.assign(document.createElement("small"), { textContent: n }));
-    b.addEventListener("click", () => { filtro.cat = filtro.cat === i ? -1 : i; mostrando = POR_PAGINA; atualizar(); });
-    return b;
-  };
-  chips.replaceChildren(botao("Todos", -1, PROD.length), ...CAT.map((nome, i) => botao(nome, i, contagem[i])));
-  document.querySelectorAll("[data-ver]").forEach(b => {
-    const i = CAT.indexOf(b.dataset.ver);
-    if (i < 0) return;
-    b.textContent = `Ver ${contagem[i]} produtos`;
-    b.addEventListener("click", () => {
-      filtro.cat = i; mostrando = POR_PAGINA; atualizar();
-      $("produtos").scrollIntoView();
-    });
-  });
+// cores das etiquetas de cor (mesma regra da dashboard)
+function corTag(nome) {
+  if (!nome) return null;
+  const c = tira(nome);
+  let bg = "#2a2a2a", fg = "#e2e8f0", bd = "#555";
+  const regras = [[["preto", "black"], "#212529", "#fff", "#6c757d"], [["branco", "white"], "#f8f9fa", "#000", "#ccc"], [["azul", "blue"], "#0d6efd", "#fff", "#0a58ca"],
+    [["vermelh", "red"], "#dc3545", "#fff", "#b02a37"], [["verde", "green"], "#198754", "#fff", "#146c43"], [["amarel", "yellow"], "#ffc107", "#000", "#ffcd39"],
+    [["laranj", "orange"], "#fd7e14", "#fff", "#e06c0c"], [["rox", "purple", "violet", "lilas"], "#6f42c1", "#fff", "#8b5cf6"], [["rosa", "pink"], "#d63384", "#fff", "#a62664"],
+    [["grafite", "chumbo"], "#41464b", "#fff", "#6c757d"], [["oliva", "olive"], "#6b7a3a", "#fff", "#8a9a4f"], [["cinz", "grey", "gray"], "#6c757d", "#fff", "#8a939b"], [["prata", "silver"], "#c0c0c0", "#000", "#a9a9a9"], [["dourad", "gold", "ouro"], "#ffd700", "#000", "#d4af37"]];
+  for (const [chaves, b, f, d] of regras) if (chaves.some(k => c.includes(k))) { bg = b; fg = f; bd = d; break; }
+  const el = Object.assign(document.createElement("span"), { className: "cor-tag", textContent: nome });
+  el.style.cssText = `background:${bg};color:${fg};border-color:${bd}`;
+  return el;
+}
+
+// ---- pedido guardado no navegador (só neste aparelho) ----
+let escolhidos = [];
+try { escolhidos = JSON.parse(localStorage.getItem("vibe-conserto") || "[]"); } catch { escolhidos = []; }
+const salvar = () => { try { localStorage.setItem("vibe-conserto", JSON.stringify(escolhidos)); } catch {} };
+
+// URL do estoque: a constante acima; em teste local também aceita ?estoque=arquivo.json
+function urlEstoque() {
+  const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  const teste = new URLSearchParams(location.search).get("estoque");
+  return (local && teste) || ESTOQUE_URL;
+}
+
+async function carregarEstoque() {
+  const url = urlEstoque();
+  let dados = null;
+  if (url) {
+    try {
+      const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 15000);
+      const resp = await fetch(url, { signal: ctrl.signal }); clearTimeout(t);
+      if (!resp.ok) throw new Error(resp.status);
+      dados = await resp.json();
+      try { localStorage.setItem("vibe-estoque", JSON.stringify(dados)); } catch {}
+    } catch (e) {
+      try { dados = JSON.parse(localStorage.getItem("vibe-estoque") || "null"); } catch {}
+    }
+  }
+  if (!dados) { semEstoque(); return; }
+  atualizado = dados.atualizado || "";
+  PECAS = [];
+  for (const cat of ["frontal", "traseira", "bateria", "dock"]) {
+    for (const it of dados[cat] || []) {
+      const p = { cat, tipo: it.tipo || "", marca: it.marca || "", modelo: it.modelo || "", cor: it.cor || "", compat: it.compat || "", tem: !!it.tem,
+        centavos: it.preco ? Math.round(it.preco * 100) : null };
+      if (!p.marca && !p.modelo) continue;
+      p.id = [cat, p.tipo, p.marca, p.modelo, p.cor, p.compat].map(tira).join("|");
+      p.busca = norm(`${p.tipo} ${p.marca} ${p.modelo} ${p.cor} ${p.compat} ${{ frontal: "frontal tela display", traseira: "traseira tampa vidro", bateria: "bateria", dock: "dock conector carga" }[cat]}`);
+      PECAS.push(p);
+    }
+  }
+  const ordem = { frontal: 0, traseira: 1, bateria: 2, dock: 3 };
+  PECAS.sort((a, b) => ordem[a.cat] - ordem[b.cat] || a.marca.localeCompare(b.marca, "pt-BR") || a.modelo.localeCompare(b.modelo, "pt-BR", { numeric: true }));
+  porId = new Map(PECAS.map(p => [p.id, p]));
+  const antes = escolhidos.length;
+  escolhidos = escolhidos.filter(id => porId.has(id)); salvar(); // tira o que saiu da tabela
+  if (escolhidos.length < antes) mostrarAviso("Uma peça do seu pedido saiu da tabela e foi removida.");
+  $("nota-precos").textContent = `Valores com peça e mão de obra, conforme o estoque de ${atualizado}. A loja confirma o valor e combina quando você leva o aparelho.`;
+  for (const k of ["todas", "frontal", "traseira", "bateria", "dock"])
+    document.querySelector(`[data-conta="${k}"]`).textContent = (k === "todas" ? PECAS.length : PECAS.filter(p => p.cat === k).length).toLocaleString("pt-BR");
+  atualizar(); atualizarPedido();
+}
+
+function semEstoque() {
+  $("info").textContent = "A tabela de preços não carregou agora. Peça o orçamento pelo WhatsApp.";
+  $("resultados").replaceChildren();
+  document.querySelector(".cabeca").hidden = true;
+  $("vazio").hidden = false;
+  $("vazio").querySelector("b").textContent = "Tabela de preços indisponível no momento.";
 }
 
 function buscar() {
-  const termos = norm(filtro.q).split(" ").filter(Boolean).map(singular);
-  let lista = filtro.cat >= 0 ? PROD.filter(p => p.cat === filtro.cat) : PROD;
+  const termos = termosDe(filtro.q);
+  const lista = filtro.aba === "todas" ? PECAS : PECAS.filter(p => p.cat === filtro.aba);
   if (!termos.length) return lista;
-  const pontuados = [];
+  const res = [];
   for (const p of lista) {
     let pontos = 0, ok = true;
     for (const t of termos) {
       const i = p.busca.indexOf(t);
       if (i < 0) { ok = false; break; }
-      pontos += (i === 0 ? 4 : p.busca[i - 1] === " " ? 2 : 0);
+      pontos += (i === 0 || p.busca[i - 1] === " ") ? 2 : 0;
+      if (termosDe(p.modelo).includes(t)) pontos += 3; // termo que é parte do modelo
     }
-    if (ok) pontuados.push([pontos, p]);
+    if (!ok) continue;
+    const q = termos.join(" "), modelo = termosDe(p.modelo).join(" ");
+    if (modelo === q || termosDe(`${p.marca} ${p.modelo}`).join(" ") === q) pontos += 10; // "iphone 11" antes de "11 Pro"
+    res.push([pontos + (p.tem ? 1 : 0), p]);
   }
-  return pontuados.sort((a, b) => b[0] - a[0] || a[1].cat - b[1].cat || a[1].nome.localeCompare(b[1].nome, "pt-BR")).map(x => x[1]);
+  return res.sort((a, b) => b[0] - a[0]).map(x => x[1]);
 }
 
-// destaca os termos buscados no nome (sem usar innerHTML com texto do usuário)
-function nomeDestacado(nome) {
+function destacar(texto) {
   const frag = document.createDocumentFragment();
-  const termos = norm(filtro.q).split(" ").filter(Boolean).map(singular).filter(t => t !== "typec");
-  if (!termos.length) { frag.append(nome); return frag; }
-  const plano = nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const marcas = new Array(nome.length).fill(false);
-  for (const t of termos) { let i = plano.indexOf(t); while (i >= 0) { for (let k = i; k < i + t.length; k++) marcas[k] = true; i = plano.indexOf(t, i + t.length); } }
-  let i = 0;
-  while (i < nome.length) {
-    let j = i; while (j < nome.length && marcas[j] === marcas[i]) j++;
-    const pedaco = nome.slice(i, j);
-    frag.append(marcas[i] ? Object.assign(document.createElement("mark"), { textContent: pedaco }) : pedaco);
+  const termos = termosDe(filtro.q);
+  if (!termos.length) { frag.append(texto); return frag; }
+  const plano = tira(texto), marca = new Array(texto.length).fill(false);
+  for (const t of termos) { let i = plano.indexOf(t); while (i >= 0) { for (let k = i; k < i + t.length; k++) marca[k] = true; i = plano.indexOf(t, i + t.length); } }
+  for (let i = 0; i < texto.length;) {
+    let j = i; while (j < texto.length && marca[j] === marca[i]) j++;
+    const pedaco = texto.slice(i, j);
+    frag.append(marca[i] ? Object.assign(document.createElement("mark"), { textContent: pedaco }) : pedaco);
     i = j;
   }
   return frag;
 }
 
-function controleQtd(codigo, rotulo) {
-  const qtd = carrinho.get(codigo) || 0;
-  if (!qtd) {
-    const b = Object.assign(document.createElement("button"), { type: "button", className: "btn cheio mini", textContent: "Adicionar" });
-    b.setAttribute("aria-label", `Adicionar ${rotulo} ao carrinho`);
-    b.addEventListener("click", () => mudar(codigo, 1, true));
+function linhaPeca(p) {
+  const li = Object.assign(document.createElement("li"), { className: "peca" + (escolhidos.includes(p.id) ? " escolhida" : "") });
+  li.dataset.id = p.id;
+  const [tipo, classe] = tipoDe(p);
+  const cTipo = Object.assign(document.createElement("span"), { className: "l-tipo" });
+  cTipo.append(Object.assign(document.createElement("span"), { className: "tipo-tag " + classe, textContent: tipo, title: p.tipo || tipo }));
+  const cMarca = Object.assign(document.createElement("span"), { className: "l-marca" }); cMarca.append(destacar(p.marca || "—"));
+  const cModelo = Object.assign(document.createElement("span"), { className: "l-modelo" });
+  const b = document.createElement("b"); b.append(destacar(p.modelo || "—")); cModelo.append(b);
+  const tagCor = corTag(p.cor); if (tagCor) cModelo.append(tagCor);
+  if (p.compat) { const c = Object.assign(document.createElement("span"), { className: "l-compat" }); c.append("Serve em: ", destacar(p.compat)); cModelo.append(c); }
+  const cPreco = Object.assign(document.createElement("span"), { className: "l-preco" });
+  cPreco.append(Object.assign(document.createElement("span"), { className: "preco-pill" + (p.centavos ? "" : " consultar"), textContent: p.centavos ? reais(p.centavos) : "Consultar" }));
+  const cDisp = Object.assign(document.createElement("span"), { className: "l-disp" });
+  cDisp.append(Object.assign(document.createElement("span"), { className: "disp " + (p.tem ? "tem" : "falta"), textContent: p.tem ? "Em estoque" : "Sob encomenda" }));
+  li.append(cTipo, cMarca, cModelo, cPreco, cDisp, botaoPeca(p));
+  return li;
+}
+
+function botaoPeca(p) {
+  const desc = servicoDe(p);
+  if (!p.centavos) {
+    const b = Object.assign(document.createElement("button"), { type: "button", className: "btn linha mini", textContent: "Perguntar" });
+    b.setAttribute("aria-label", `Perguntar o preço: ${desc}`);
+    b.addEventListener("click", () => consultarProduto(desc));
     return b;
   }
-  const box = Object.assign(document.createElement("span"), { className: "qtd" });
-  const menos = Object.assign(document.createElement("button"), { type: "button", textContent: "−" });
-  menos.setAttribute("aria-label", `Tirar um: ${rotulo}`);
-  menos.addEventListener("click", () => mudar(codigo, -1));
-  const n = Object.assign(document.createElement("output"), { textContent: qtd });
-  n.setAttribute("aria-label", `Quantidade: ${qtd}`);
-  const mais = Object.assign(document.createElement("button"), { type: "button", textContent: "+" });
-  mais.setAttribute("aria-label", `Mais um: ${rotulo}`);
-  mais.addEventListener("click", () => mudar(codigo, 1));
-  box.append(menos, n, mais);
-  return box;
+  const escolhido = escolhidos.includes(p.id);
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "btn mini " + (escolhido ? "escolhido" : "cheio"), textContent: escolhido ? "✓ No pedido" : "Escolher" });
+  b.setAttribute("aria-pressed", String(escolhido));
+  b.setAttribute("aria-label", `${escolhido ? "Tirar do pedido" : "Escolher"}: ${desc}, ${reais(p.centavos)}`);
+  b.addEventListener("click", () => alternar(p.id));
+  return b;
 }
 
 function atualizar() {
-  const busca = filtro.q.trim();
-  const modoLista = busca !== "" || filtro.cat >= 0;
-  $("chips").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.i === filtro.cat && (filtro.cat >= 0 || modoLista))));
-  $("vitrine").hidden = modoLista;
+  const termos = termosDe(filtro.q);
+  document.querySelectorAll("[data-aba]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.aba === filtro.aba)));
   $("limpar-busca").hidden = !filtro.q;
-  if (!modoLista) {
-    $("resultados").hidden = true; $("vazio").hidden = true; $("mostrar-mais").hidden = true;
-    $("info").innerHTML = "";
-    $("info").append(`${PROD.length.toLocaleString("pt-BR")} produtos com preço · catálogo de ${dataCatalogo}. Busque ou escolha uma categoria.`);
-    return;
-  }
-  achados = buscar();
-  const onde = filtro.cat >= 0 ? ` em ${CAT[filtro.cat]}` : "";
+  const achados = buscar();
+  const onde = filtro.aba === "todas" ? "" : ` em ${document.querySelector(`[data-aba="${filtro.aba}"]`).childNodes[1].textContent}`;
   $("info").textContent = achados.length
-    ? `${achados.length.toLocaleString("pt-BR")} ${achados.length === 1 ? "produto" : "produtos"}${busca ? ` para “${busca}”` : ""}${onde} · preços de ${dataCatalogo}`
-    : `Nenhum produto${busca ? ` para “${busca}”` : ""}${onde}.`;
+    ? `${achados.length.toLocaleString("pt-BR")} ${achados.length === 1 ? "peça" : "peças"}${termos.length ? ` para “${filtro.q.trim()}”` : ""}${onde} · estoque de ${atualizado}`
+    : `Nenhuma peça${termos.length ? ` para “${filtro.q.trim()}”` : ""}${onde}.`;
+  document.querySelector(".cabeca").hidden = achados.length === 0;
   $("vazio").hidden = achados.length > 0;
-  const ul = $("resultados");
-  ul.hidden = achados.length === 0;
-  ul.replaceChildren(...achados.slice(0, mostrando).map(itemResultado));
+  $("resultados").replaceChildren(...achados.slice(0, mostrando).map(linhaPeca));
   const resta = achados.length - mostrando;
   $("mostrar-mais").hidden = resta <= 0;
   $("mostrar-mais").textContent = `Mostrar mais (${resta.toLocaleString("pt-BR")})`;
 }
 
-function itemResultado(p) {
-  const li = Object.assign(document.createElement("li"), { className: "prod" + (carrinho.has(p.codigo) ? " no-carrinho" : "") });
-  li.dataset.codigo = p.codigo;
-  const txt = document.createElement("div");
-  const b = document.createElement("b"); b.append(nomeDestacado(p.nome));
-  txt.append(Object.assign(document.createElement("span"), { className: "p-cat", textContent: CAT[p.cat] }), b);
-  const pe = Object.assign(document.createElement("div"), { className: "p-pe" });
-  pe.append(Object.assign(document.createElement("strong"), { textContent: reais(p.centavos) }), controleQtd(p.codigo, p.nome));
-  li.append(txt, pe);
-  return li;
+function redesenhar(id) {
+  const velho = $("resultados").querySelector(`[data-id="${CSS.escape(id)}"]`);
+  if (!velho) return;
+  const tinhaFoco = velho.contains(document.activeElement);
+  const novo = linhaPeca(porId.get(id));
+  velho.replaceWith(novo);
+  if (tinhaFoco) novo.querySelector("button").focus();
 }
 
-// redesenha só o cartão do produto que mudou (mantém a posição da página)
-function redesenharProduto(codigo) {
-  const velho = $("resultados").querySelector(`[data-codigo="${CSS.escape(codigo)}"]`);
-  if (velho) {
-    const temFoco = velho.contains(document.activeElement);
-    const novo = itemResultado(porCodigo.get(codigo));
-    velho.replaceWith(novo);
-    if (temFoco) (novo.querySelector(".qtd button:last-child") || novo.querySelector("button")).focus();
-  }
-}
-
-function mudar(codigo, delta, avisar = false) {
-  const qtd = Math.max(0, Math.min(99, (carrinho.get(codigo) || 0) + delta));
-  if (qtd) carrinho.set(codigo, qtd); else carrinho.delete(codigo);
-  salvar();
-  redesenharProduto(codigo);
-  atualizarCarrinho();
-  if (avisar) mostrarAviso(`Adicionado: ${porCodigo.get(codigo).nome}`);
+function alternar(id) {
+  const i = escolhidos.indexOf(id);
+  if (i >= 0) escolhidos.splice(i, 1); else { escolhidos.push(id); mostrarAviso(`No pedido: ${servicoDe(porId.get(id))}`); }
+  salvar(); redesenhar(id); atualizarPedido();
 }
 
 let tAviso;
 function mostrarAviso(texto) {
   const a = $("aviso"); a.textContent = texto; a.classList.add("on");
-  clearTimeout(tAviso); tAviso = setTimeout(() => a.classList.remove("on"), 2200);
+  clearTimeout(tAviso); tAviso = setTimeout(() => a.classList.remove("on"), 2400);
 }
 
-function totais() {
-  let itens = 0, centavos = 0;
-  for (const [c, q] of carrinho) { const p = porCodigo.get(c); if (p) { itens += q; centavos += p.centavos * q; } }
-  return { itens, centavos };
-}
+function totalCentavos() { return escolhidos.reduce((s, id) => s + (porId.get(id)?.centavos || 0), 0); }
 
-function atualizarCarrinho() {
-  const { itens, centavos } = totais();
-  $("badge").hidden = itens === 0;
-  $("badge").textContent = itens;
-  $("abrir-carrinho").setAttribute("aria-label", itens ? `Abrir carrinho, ${itens} ${itens === 1 ? "item" : "itens"}, ${reais(centavos)}` : "Abrir carrinho, vazio");
-  $("pilula").hidden = itens === 0 || $("carrinho").open;
-  $("pilula-txt").textContent = `${itens} ${itens === 1 ? "item" : "itens"} · ${reais(centavos)}`;
-  $("pilula").setAttribute("aria-label", `Ver carrinho: ${itens} ${itens === 1 ? "item" : "itens"}, ${reais(centavos)}`);
-  $("carrinho-vazio").hidden = itens > 0;
-  $("form-pedido").hidden = itens === 0;
-  $("total").textContent = reais(centavos);
-  const ul = $("itens");
-  const focoCodigo = ul.contains(document.activeElement) ? document.activeElement.closest("[data-codigo]")?.dataset.codigo : null;
-  ul.replaceChildren(...[...carrinho].map(([c, q]) => {
-    const p = porCodigo.get(c); if (!p) return "";
+function atualizarPedido() {
+  const n = escolhidos.length, total = totalCentavos();
+  const rotulo = `${n} ${n === 1 ? "conserto" : "consertos"} · ${reais(total)}`;
+  $("badge").hidden = n === 0; $("badge").textContent = n;
+  $("abrir-carrinho").setAttribute("aria-label", n ? `Abrir pedido de conserto: ${rotulo}` : "Abrir pedido de conserto, vazio");
+  $("pilula").hidden = n === 0 || $("carrinho").open;
+  $("pilula-txt").textContent = rotulo;
+  $("pilula").setAttribute("aria-label", `Ver pedido: ${rotulo}`);
+  $("carrinho-vazio").hidden = n > 0;
+  $("form-pedido").hidden = n === 0;
+  $("total").textContent = reais(total);
+  $("itens").replaceChildren(...escolhidos.map(id => {
+    const p = porId.get(id);
     const li = Object.assign(document.createElement("li"), { className: "item" });
-    li.dataset.codigo = c;
+    const tirar = Object.assign(document.createElement("button"), { type: "button", className: "i-tirar", textContent: "Tirar" });
+    tirar.setAttribute("aria-label", `Tirar do pedido: ${servicoDe(p)}`);
+    tirar.addEventListener("click", () => { alternar(id); if (escolhidos.length) $("itens").querySelector(".i-tirar")?.focus(); else $("fechar-carrinho").focus(); });
     li.append(
-      Object.assign(document.createElement("b"), { textContent: p.nome }),
-      Object.assign(document.createElement("span"), { className: "i-sub", textContent: reais(p.centavos * q) }),
-      Object.assign(document.createElement("span"), { className: "i-preco", textContent: `${reais(p.centavos)} cada` }),
-      controleQtd(c, p.nome),
+      Object.assign(document.createElement("b"), { textContent: servicoDe(p) }),
+      Object.assign(document.createElement("span"), { className: "i-sub", textContent: reais(p.centavos) }),
+      Object.assign(document.createElement("span"), { className: "i-info", textContent: p.tem ? "Peça em estoque" : "Peça sob encomenda" }),
+      tirar,
     );
     return li;
   }));
-  if (focoCodigo) {
-    const alvo = ul.querySelector(`[data-codigo="${CSS.escape(focoCodigo)}"] .qtd button:last-child`);
-    (alvo || $("fechar-carrinho")).focus();
-  }
 }
 
 function linkPedido() {
   const loja = LOJAS.find(l => l.fone === $("p-loja").value);
-  const { centavos } = totais();
-  const linhas = [...carrinho].map(([c, q]) => { const p = porCodigo.get(c); return p ? `• ${q}x ${p.nome} (cód. ${c}) — ${reais(p.centavos * q)}` : null; }).filter(Boolean);
   const obs = $("p-obs").value.trim();
+  const linhas = escolhidos.map(id => { const p = porId.get(id); return `• ${servicoDe(p)} — ${reais(p.centavos)}${p.tem ? "" : " _(peça sob encomenda)_"}`; });
   const texto = [
-    "*PRÉ-PEDIDO PELO SITE*", "",
+    "*PEDIDO DE CONSERTO PELO SITE*", "",
     `*Loja:* ${loja.nome}`, `*Cliente:* ${$("p-nome").value.trim()}`, "",
     ...linhas, "",
-    `*Total estimado:* ${reais(centavos)}`,
+    `*Total:* ${reais(totalCentavos())}`,
     ...(obs ? [`*Observação:* ${obs}`] : []), "",
-    `_Olá! Montei este pedido pelo site (preços de ${dataCatalogo}). Podem confirmar a disponibilidade e o valor?_`,
+    `_Olá! Escolhi pelo site (estoque de ${atualizado}). Podem confirmar o valor e quando posso levar o aparelho?_`,
   ].join("\n");
   return `https://wa.me/${loja.fone}?text=${encodeURIComponent(texto)}`;
 }
@@ -1005,22 +1083,27 @@ let tBusca;
 $("q").addEventListener("input", e => { clearTimeout(tBusca); tBusca = setTimeout(() => { filtro.q = e.target.value; mostrando = POR_PAGINA; atualizar(); }, 120); });
 $("q").addEventListener("keydown", e => { if (e.key === "Escape" && e.target.value) { e.target.value = ""; filtro.q = ""; atualizar(); } });
 $("limpar-busca").addEventListener("click", () => { $("q").value = ""; filtro.q = ""; mostrando = POR_PAGINA; atualizar(); $("q").focus(); });
+document.querySelectorAll("[data-aba]").forEach(b => b.addEventListener("click", () => { filtro.aba = b.dataset.aba; mostrando = POR_PAGINA; if (PECAS.length) atualizar(); }));
 $("mostrar-mais").addEventListener("click", () => { mostrando += POR_PAGINA * 2; atualizar(); });
-$("perguntar").addEventListener("click", () => consultarProduto(filtro.q.trim() || (filtro.cat >= 0 ? CAT[filtro.cat] + ": " : "")));
+$("perguntar").addEventListener("click", () => {
+  form.elements.tipo.value = "conserto"; ajustarTipo();
+  $("f-aparelho").value = filtro.q.trim();
+  $("orcamento").scrollIntoView(); $("f-nome").focus({ preventScroll: true });
+});
+// cartões de produtos de loja: abrem a consulta pelo WhatsApp
+document.querySelectorAll("[data-cat]").forEach(b => b.addEventListener("click", () => consultarProduto(b.dataset.cat + ": ")));
 
 const dlg = $("carrinho");
-const abrir = () => { dlg.showModal(); atualizarCarrinho(); };
+const abrir = () => { dlg.showModal(); atualizarPedido(); };
 $("abrir-carrinho").addEventListener("click", abrir);
 $("pilula").addEventListener("click", abrir);
 $("fechar-carrinho").addEventListener("click", () => dlg.close());
-dlg.addEventListener("close", atualizarCarrinho);
+dlg.addEventListener("close", atualizarPedido);
 dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); }); // toque fora fecha
 $("limpar-carrinho").addEventListener("click", () => {
-  if (!confirm("Esvaziar o carrinho?")) return;
-  const codigos = [...carrinho.keys()];
-  carrinho.clear(); salvar(); codigos.forEach(redesenharProduto); atualizarCarrinho();
+  if (!confirm("Limpar o pedido?")) return;
+  const ids = escolhidos.splice(0); salvar(); ids.forEach(redesenhar); atualizarPedido();
 });
-// lojas no formulário do pedido (mesma lista das lojas da página)
 for (const bairro of bairros) {
   const grupo = Object.assign(document.createElement("optgroup"), { label: bairro });
   for (const loja of LOJAS.filter(l => l.bairro === bairro))
@@ -1034,7 +1117,7 @@ $("form-pedido").addEventListener("submit", e => {
   window.open(linkPedido(), "_blank", "noopener");
 });
 
-carregarCatalogo();
+carregarEstoque();
 
 // ---------- Entrada suave ao rolar ----------
 const itens = document.querySelectorAll(".surge");
