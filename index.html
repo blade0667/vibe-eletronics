@@ -222,6 +222,17 @@ em { font-style: normal; color: var(--mint); }
   .l-tipo { grid-area: tipo; } .l-marca { grid-area: marca; } .l-disp { grid-area: disp; justify-self: end; }
   .l-modelo { grid-area: modelo; } .l-preco { grid-area: preco; justify-self: start; } .peca .btn { grid-area: botao; }
 }
+.sugestoes { display: grid; gap: 6px; justify-items: start; padding: 4px 2px 0; }
+.sugestoes h3 { color: var(--mint); }
+.sugestoes > p { font-size: 14.5px; color: var(--muted); margin-bottom: 10px; }
+.sug-grade { width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.sug { display: grid; gap: 6px; justify-items: start; padding: 16px; text-align: left; border-radius: 16px; border: 1.5px solid var(--line); background: var(--glass); color: #fff; font-family: inherit; cursor: pointer; transition: border-color .15s, transform .15s, background .15s; }
+.sug:hover { border-color: var(--mint); background: rgba(79,240,210,.08); transform: translateY(-2px); }
+.sug small { font: 600 12px/1 "Oswald", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--mint); }
+.sug b { font-size: 19px; font-weight: 800; line-height: 1.2; }
+.sug-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.sug-tags span { padding: 3px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; background: rgba(255,255,255,.1); color: var(--muted); }
+.sug-preco { font-size: 13.5px; font-weight: 700; color: var(--muted); }
 .vazio { padding: 26px 16px; text-align: center; display: grid; gap: 8px; justify-items: center; }
 .vazio p { color: var(--muted); font-size: 15px; }
 .mais { display: flex; justify-content: center; margin-top: 18px; }
@@ -362,7 +373,7 @@ footer a:hover { color: #fff; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .surge { opacity: 1; translate: none; transition: none; }
-  .btn, .servico, .cat, .flutua, .aviso { transition: none; }
+  .btn, .servico, .cat, .sug, .flutua, .aviso { transition: none; }
 }
 </style>
 </head>
@@ -488,6 +499,12 @@ footer a:hover { color: #fff; }
         <button type="button" data-aba="dock" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0zM12 17v5"/></svg>Conectores<small data-conta="dock"></small></button>
       </div>
       <p class="info" id="info" aria-live="polite">Carregando o estoque…</p>
+      <div class="sugestoes" id="sugestoes" hidden>
+        <h3>Comece pelo seu modelo</h3>
+        <p>Modelos com mais tipos de conserto em estoque agora.</p>
+        <div class="sug-grade" id="sug-grade"></div>
+        <button class="btn linha mini" type="button" id="ver-tudo">Ver a tabela completa</button>
+      </div>
       <div class="cabeca" aria-hidden="true"><span>Tipo</span><span>Marca</span><span>Modelo e cor</span><span>Preço</span><span>Estoque</span><span></span></div>
       <ul class="linhas" id="resultados"></ul>
       <div class="vazio" id="vazio" hidden>
@@ -824,9 +841,86 @@ let PECAS = [], porId = new Map(), atualizado = "";
 let filtro = { q: "", aba: "todas" }, mostrando = POR_PAGINA;
 
 const tira = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-const norm = t => tira(t).replace(/[-/+.,()]/g, " ").replace(/\s+/g, " ").trim();
-const singular = w => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss")) ? w.slice(0, -1) : w;
-const termosDe = q => norm(q).split(" ").filter(Boolean).map(singular);
+const norm = t => tira(t).replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+const singular = w => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") && !/\d/.test(w)) ? w.slice(0, -1) : w; // "telas" -> "tela", mas "k41s" fica
+
+// ---- busca tolerante: apelidos de marca, palavras a mais, junções e erros de digitação ----
+const PARAR = new Set("a o os as um uma de do da dos das para pra e com no na em meu minha celular aparelho troca trocar conserto consertar arrumar preco valor quanto custa quero preciso tem peca".split(" "));
+const APELIDOS = { samsung: ["galaxy"], motorola: ["moto"], iphone: ["apple"], redmi: ["xiaomi", "mi"], poco: ["xiaomi", "pocophone"], xiaomi: ["mi", "redmi"] };
+const MARCA_CERTA = { samgung: "Samsung", sansung: "Samsung", motorolla: "Motorola" }; // erros de digitação na planilha
+const SINONIMOS = {
+  frontal: "frontal tela display lcd visor touch",
+  traseira: "traseira tampa vidro carcaca costas",
+  bateria: "bateria",
+  dock: "dock conector carga carregamento carregador entrada usb",
+};
+const CORES = new Set("preto preta branco branca azul vermelho verde amarelo laranja roxo rosa cinza prata dourado grafite chumbo oliva marinho".split(" "));
+const PALAVRAS_TIPO = new Set((Object.values(SINONIMOS).join(" ") + " incell oled vivid original").split(" "));
+const PALAVRAS_MARCA = new Set([...Object.keys(APELIDOS), ...Object.values(APELIDOS).flat(), "lg", "realme"]);
+
+// "a 54" -> "a54"; tira palavras como "troca", "de", "do"; "telas" -> "tela"
+function termosDe(q) {
+  const bruto = norm(q).split(" ").filter(Boolean), juntos = [];
+  for (let i = 0; i < bruto.length; i++) {
+    if (/^[a-z]$/.test(bruto[i]) && /^\d/.test(bruto[i + 1] || "")) { juntos.push(bruto[i] + bruto[++i]); continue; }
+    juntos.push(bruto[i]);
+  }
+  const uteis = juntos.filter(t => !PARAR.has(t)).map(singular);
+  return uteis.length ? uteis : juntos.filter(t => t.length > 1).map(singular);
+}
+
+// distância de edição com limite (para erros de digitação)
+function distancia(a, b, max) {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let ant = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const atual = [i]; let menor = i;
+    for (let j = 1; j <= b.length; j++) {
+      atual[j] = Math.min(ant[j] + 1, atual[j - 1] + 1, ant[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (atual[j] < menor) menor = atual[j];
+    }
+    if (menor > max) return max + 1;
+    ant = atual;
+  }
+  return ant[b.length];
+}
+
+// modelos que a peça atende, sem cor e sem 4G/5G: "8 Plus Preto" -> "8 plus"; "J6 / J4 Plus" -> ["j6", "j4 plus"]
+function modelosDe(p) {
+  const fonte = p.cat === "bateria" ? p.compat : p.modelo;
+  if (fonte.includes(">")) return []; // faixa de modelos ("XR > 17 Pro")
+  return fonte.split("/").map(m => norm(m).split(" ").filter(w => w && !CORES.has(w) && !/^[45]g$/.test(w)).join(" ")).filter(Boolean);
+}
+
+// monta os textos de busca de uma peça
+function indexar(p) {
+  const marca = tira(p.marca);
+  const nomes = [marca, ...(APELIDOS[marca] || [])].filter(Boolean);
+  p.modelos = modelosDe(p);
+  p.busca = norm(`${p.tipo} ${nomes.join(" ")} ${p.modelo} ${p.cor} ${p.compat} ${SINONIMOS[p.cat]}`);
+  p.palavras = [...new Set(p.busca.split(" "))];
+  // versões sem espaço: "iphone11", "motog54", "galaxya54", "note12"
+  const juntos = p.modelos.flatMap(m => { const c = m.replace(/ /g, ""); return [c, ...nomes.map(n => n + c)]; });
+  p.compacto = juntos.join(" ");
+  p.exatos = new Set(juntos); // para saber se a busca é exatamente este modelo
+}
+
+// compara um termo com uma peça: 0 = não bate; quanto maior, melhor
+function casar(t, p) {
+  const i = p.busca.indexOf(t);
+  if (i >= 0) {
+    const inicio = i === 0 || p.busca[i - 1] === " ";
+    const fim = i + t.length === p.busca.length || p.busca[i + t.length] === " ";
+    if (/^\d+$/.test(t) && !inicio) return 1;          // "11" dentro de "a11" vale pouco
+    return inicio && fim ? 5 : inicio ? 4 : 2;
+  }
+  if (t.length >= 3 && p.compacto.includes(t)) return 3;
+  if (/^[a-z]+$/.test(t) && t.length >= 4) {             // erro de digitação só em palavras, nunca em código de modelo
+    const max = t.length >= 7 ? 2 : 1;
+    if (p.palavras.some(w => /^[a-z]+$/.test(w) && w.length >= 4 && distancia(t, w, max) <= max)) return 1;
+  }
+  return 0;
+}
 
 // rótulo do tipo, no padrão da dashboard (Incell, OLED, Vivid, Traseira, Vidro, Bateria, Dock)
 function tipoDe(p) {
@@ -900,13 +994,16 @@ async function carregarEstoque() {
       const p = { cat, tipo: it.tipo || "", marca: it.marca || "", modelo: it.modelo || "", cor: it.cor || "", compat: it.compat || "", tem: !!it.tem,
         centavos: it.preco ? Math.round(it.preco * 100) : null };
       if (!p.marca && !p.modelo) continue;
+      p.marca = MARCA_CERTA[tira(p.marca)] || p.marca;
       p.id = [cat, p.tipo, p.marca, p.modelo, p.cor, p.compat].map(tira).join("|");
-      p.busca = norm(`${p.tipo} ${p.marca} ${p.modelo} ${p.cor} ${p.compat} ${{ frontal: "frontal tela display", traseira: "traseira tampa vidro", bateria: "bateria", dock: "dock conector carga" }[cat]}`);
+      indexar(p);
       PECAS.push(p);
     }
   }
+  calcularRelevancia();
   const ordem = { frontal: 0, traseira: 1, bateria: 2, dock: 3 };
-  PECAS.sort((a, b) => ordem[a.cat] - ordem[b.cat] || a.marca.localeCompare(b.marca, "pt-BR") || a.modelo.localeCompare(b.modelo, "pt-BR", { numeric: true }));
+  // sem busca: modelos com mais peças em estoque primeiro
+  PECAS.sort((a, b) => ordem[a.cat] - ordem[b.cat] || b.rel - a.rel || (b.tem - a.tem) || a.marca.localeCompare(b.marca, "pt-BR") || a.modelo.localeCompare(b.modelo, "pt-BR", { numeric: true }));
   porId = new Map(PECAS.map(p => [p.id, p]));
   const antes = escolhidos.length;
   escolhidos = escolhidos.filter(id => porId.has(id)); salvar(); // tira o que saiu da tabela
@@ -925,25 +1022,55 @@ function semEstoque() {
   $("vazio").querySelector("b").textContent = "Tabela de preços indisponível no momento.";
 }
 
+// Relevância de cada modelo: quantos tipos de conserto a loja tem em estoque para ele.
+let MODELOS = new Map(), SUGESTOES = [];
+function calcularRelevancia() {
+  MODELOS = new Map();
+  for (const p of PECAS) {
+    if (!p.tem || !p.centavos) continue;
+    const marca = tira(p.marca);
+    for (const m of p.modelos) {
+      const chave = `${marca} ${m}`;
+      let mod = MODELOS.get(chave);
+      if (!mod) MODELOS.set(chave, mod = { chave, marca: p.marca, modelo: m, tipos: new Set(), n: 0, min: Infinity });
+      mod.tipos.add(p.cat); mod.n++; mod.min = Math.min(mod.min, p.centavos);
+    }
+  }
+  for (const mod of MODELOS.values()) mod.pontos = mod.tipos.size * 100 + mod.n;
+  for (const p of PECAS) p.rel = Math.max(0, ...p.modelos.map(m => MODELOS.get(`${tira(p.marca)} ${m}`)?.pontos || 0));
+  // sugestões: os melhores de cada marca, alternando as marcas (as maiores primeiro)
+  const porMarca = new Map();
+  for (const mod of [...MODELOS.values()].filter(m => m.tipos.size >= 2).sort((a, b) => b.pontos - a.pontos || b.modelo.localeCompare(a.modelo, "pt-BR", { numeric: true })))
+    (porMarca.get(mod.marca) || porMarca.set(mod.marca, []).get(mod.marca)).push(mod);
+  const filas = [...porMarca.values()].sort((a, b) => b.length - a.length);
+  SUGESTOES = [];
+  for (let i = 0; SUGESTOES.length < 12 && filas.some(f => f[i]); i++)
+    for (const f of filas) if (f[i] && SUGESTOES.length < 12) SUGESTOES.push(f[i]);
+}
+
+// Devolve { lista, aproximado }. Primeiro exige todos os termos; se nada bater, aceita resultados parecidos.
 function buscar() {
   const termos = termosDe(filtro.q);
-  const lista = filtro.aba === "todas" ? PECAS : PECAS.filter(p => p.cat === filtro.aba);
-  if (!termos.length) return lista;
-  const res = [];
-  for (const p of lista) {
-    let pontos = 0, ok = true;
+  const base = filtro.aba === "todas" ? PECAS : PECAS.filter(p => p.cat === filtro.aba);
+  if (!termos.length) return { lista: base, aproximado: false };
+  const doModelo = termos.filter(t => !PALAVRAS_TIPO.has(t) && !PALAVRAS_MARCA.has(t) && !CORES.has(t));
+  const alvoJunto = doModelo.join("");
+  const exatos = [], parciais = [];
+  for (const p of base) {
+    let pontos = 0, bateram = 0, codigoFalhou = false;
     for (const t of termos) {
-      const i = p.busca.indexOf(t);
-      if (i < 0) { ok = false; break; }
-      pontos += (i === 0 || p.busca[i - 1] === " ") ? 2 : 0;
-      if (termosDe(p.modelo).includes(t)) pontos += 3; // termo que é parte do modelo
+      const c = casar(t, p);
+      if (c) { pontos += c; bateram++; }
+      else if (/\d/.test(t)) codigoFalhou = true;      // código de modelo não pode ser "parecido"
     }
-    if (!ok) continue;
-    const q = termos.join(" "), modelo = termosDe(p.modelo).join(" ");
-    if (modelo === q || termosDe(`${p.marca} ${p.modelo}`).join(" ") === q) pontos += 10; // "iphone 11" antes de "11 Pro"
-    res.push([pontos + (p.tem ? 1 : 0), p]);
+    if (!bateram) continue;
+    if (alvoJunto && p.exatos.has(alvoJunto)) pontos += 12; // "iphone 11" e "iphone11" antes de "11 Pro"
+    pontos += (p.tem ? 1 : 0) + p.rel / 1000;
+    if (bateram === termos.length) exatos.push([pontos, p]);
+    else if (!codigoFalhou && bateram >= Math.ceil(termos.length / 2)) parciais.push([pontos + bateram * 5, p]);
   }
-  return res.sort((a, b) => b[0] - a[0]).map(x => x[1]);
+  const ordenar = l => l.sort((a, b) => b[0] - a[0]).map(x => x[1]);
+  return exatos.length ? { lista: ordenar(exatos), aproximado: false } : { lista: ordenar(parciais), aproximado: true };
 }
 
 function destacar(texto) {
@@ -951,7 +1078,7 @@ function destacar(texto) {
   const termos = termosDe(filtro.q);
   if (!termos.length) { frag.append(texto); return frag; }
   const plano = tira(texto), marca = new Array(texto.length).fill(false);
-  for (const t of termos) { let i = plano.indexOf(t); while (i >= 0) { for (let k = i; k < i + t.length; k++) marca[k] = true; i = plano.indexOf(t, i + t.length); } }
+  for (const t of termos) { if (t.length < 2) continue; let i = plano.indexOf(t); while (i >= 0) { for (let k = i; k < i + t.length; k++) marca[k] = true; i = plano.indexOf(t, i + t.length); } }
   for (let i = 0; i < texto.length;) {
     let j = i; while (j < texto.length && marca[j] === marca[i]) j++;
     const pedaco = texto.slice(i, j);
@@ -996,15 +1123,47 @@ function botaoPeca(p) {
   return b;
 }
 
+// cartões de sugestão: modelos com mais tipos de conserto em estoque
+const ROTULO_TIPO = { frontal: "Tela", traseira: "Traseira", bateria: "Bateria", dock: "Conector" };
+function cartaoSugestao(mod) {
+  const b = Object.assign(document.createElement("button"), { type: "button", className: "sug" });
+  const nome = mod.modelo.replace(/\b[a-z]/g, c => c.toUpperCase()).replace(/\b(Se|Fe|Xr|Xs|Pro|Max|Plus)\b/g, m => ({ Se: "SE", Fe: "FE", Xr: "XR", Xs: "XS" }[m] || m));
+  const tags = Object.assign(document.createElement("span"), { className: "sug-tags" });
+  for (const t of ["frontal", "traseira", "bateria", "dock"]) if (mod.tipos.has(t)) tags.append(Object.assign(document.createElement("span"), { textContent: ROTULO_TIPO[t] }));
+  b.append(
+    Object.assign(document.createElement("small"), { textContent: mod.marca }),
+    Object.assign(document.createElement("b"), { textContent: nome }),
+    tags,
+    Object.assign(document.createElement("span"), { className: "sug-preco", textContent: `a partir de ${reais(mod.min)}` }),
+  );
+  b.addEventListener("click", () => {
+    filtro.q = `${mod.marca} ${nome}`; $("q").value = filtro.q; filtro.tudo = false; mostrando = POR_PAGINA; atualizar();
+    $("q").scrollIntoView({ block: "center" });
+  });
+  return b;
+}
+
 function atualizar() {
   const termos = termosDe(filtro.q);
   document.querySelectorAll("[data-aba]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.aba === filtro.aba)));
   $("limpar-busca").hidden = !filtro.q;
-  const achados = buscar();
+  // tela inicial: sugestões no lugar da tabela inteira
+  const inicial = !termos.length && filtro.aba === "todas" && !filtro.tudo && SUGESTOES.length > 0;
+  $("sugestoes").hidden = !inicial;
+  if (inicial) {
+    $("sug-grade").replaceChildren(...SUGESTOES.map(cartaoSugestao));
+    $("ver-tudo").textContent = `Ver a tabela completa (${PECAS.length.toLocaleString("pt-BR")} peças)`;
+    $("info").textContent = `${PECAS.length.toLocaleString("pt-BR")} peças na tabela · estoque de ${atualizado}`;
+    document.querySelector(".cabeca").hidden = true; $("vazio").hidden = true; $("mostrar-mais").hidden = true;
+    $("resultados").replaceChildren();
+    return;
+  }
+  const { lista: achados, aproximado } = buscar();
   const onde = filtro.aba === "todas" ? "" : ` em ${document.querySelector(`[data-aba="${filtro.aba}"]`).childNodes[1].textContent}`;
-  $("info").textContent = achados.length
-    ? `${achados.length.toLocaleString("pt-BR")} ${achados.length === 1 ? "peça" : "peças"}${termos.length ? ` para “${filtro.q.trim()}”` : ""}${onde} · estoque de ${atualizado}`
-    : `Nenhuma peça${termos.length ? ` para “${filtro.q.trim()}”` : ""}${onde}.`;
+  const para = termos.length ? ` para “${filtro.q.trim()}”` : "";
+  $("info").textContent = !achados.length ? `Nenhuma peça${para}${onde}.`
+    : aproximado ? `Não achamos exatamente “${filtro.q.trim()}”${onde}. Veja ${achados.length === 1 ? "o resultado parecido" : `os ${achados.length.toLocaleString("pt-BR")} resultados parecidos`}:`
+    : `${achados.length.toLocaleString("pt-BR")} ${achados.length === 1 ? "peça" : "peças"}${para}${onde} · estoque de ${atualizado}`;
   document.querySelector(".cabeca").hidden = achados.length === 0;
   $("vazio").hidden = achados.length > 0;
   $("resultados").replaceChildren(...achados.slice(0, mostrando).map(linhaPeca));
@@ -1083,7 +1242,8 @@ let tBusca;
 $("q").addEventListener("input", e => { clearTimeout(tBusca); tBusca = setTimeout(() => { filtro.q = e.target.value; mostrando = POR_PAGINA; atualizar(); }, 120); });
 $("q").addEventListener("keydown", e => { if (e.key === "Escape" && e.target.value) { e.target.value = ""; filtro.q = ""; atualizar(); } });
 $("limpar-busca").addEventListener("click", () => { $("q").value = ""; filtro.q = ""; mostrando = POR_PAGINA; atualizar(); $("q").focus(); });
-document.querySelectorAll("[data-aba]").forEach(b => b.addEventListener("click", () => { filtro.aba = b.dataset.aba; mostrando = POR_PAGINA; if (PECAS.length) atualizar(); }));
+document.querySelectorAll("[data-aba]").forEach(b => b.addEventListener("click", () => { filtro.aba = b.dataset.aba; filtro.tudo = false; mostrando = POR_PAGINA; if (PECAS.length) atualizar(); }));
+$("ver-tudo").addEventListener("click", () => { filtro.tudo = true; mostrando = POR_PAGINA; atualizar(); });
 $("mostrar-mais").addEventListener("click", () => { mostrando += POR_PAGINA * 2; atualizar(); });
 $("perguntar").addEventListener("click", () => {
   form.elements.tipo.value = "conserto"; ajustarTipo();
