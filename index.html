@@ -37,6 +37,12 @@
   --mint: #4ff0d2; --cyan: #2fd8ff; --muted: #cfc6f2; --text: #fff;
   --glass: rgba(255,255,255,.06); --line: rgba(160,230,255,.22);
   --max: 1160px; --gut: clamp(18px, 4vw, 40px);
+  /* Movimento: uma curva para quase tudo, entrada que desacelera, saída que acelera, três durações */
+  --ease: cubic-bezier(.2, 0, 0, 1);
+  --ease-entra: cubic-bezier(.05, .7, .1, 1);
+  --ease-sai: cubic-bezier(.3, 0, 1, 1);
+  --ease-pop: cubic-bezier(.175, .885, .32, 1.275);
+  --rapido: 150ms; --padrao: 280ms; --lento: 520ms;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
@@ -78,8 +84,9 @@ em { font-style: normal; color: var(--mint); }
   padding: 15px 26px; border-radius: 999px; border: 2px solid transparent;
   font: 800 16px/1 "Montserrat", sans-serif; text-decoration: none; cursor: pointer; white-space: nowrap;
   background-origin: border-box;
-  transition: transform .15s, box-shadow .15s, background .15s;
+  transition: transform var(--rapido) var(--ease), box-shadow var(--rapido) var(--ease), background var(--rapido) var(--ease), border-color var(--rapido) var(--ease);
 }
+.btn:active { transform: translateY(0) scale(.97); transition-duration: 80ms; }
 .btn svg { width: 20px; height: 20px; flex: none; }
 .btn:hover { transform: translateY(-2px); }
 .btn.cheio { background: var(--mint); color: var(--bg1); box-shadow: 0 10px 32px rgba(79,240,210,.3); }
@@ -152,14 +159,14 @@ em { font-style: normal; color: var(--mint); }
 .escuro { background: var(--bg0); }
 
 /* serviços */
-.servico { padding: 24px 22px; transition: border-color .15s, transform .15s; }
+.servico { padding: 24px 22px; transition: border-color var(--rapido) var(--ease), transform var(--padrao) var(--ease); }
 .servico:hover { border-color: var(--mint); transform: translateY(-3px); }
 .servico svg { width: 44px; height: 44px; color: var(--mint); margin-bottom: 14px; }
 .servico b { display: block; font-size: 18px; font-weight: 800; line-height: 1.25; }
 .servico p { margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
 
 /* produtos */
-.cat { padding: 22px; display: flex; flex-direction: column; align-items: flex-start; background: rgba(11,5,32,.45); transition: border-color .15s, transform .15s; }
+.cat { padding: 22px; display: flex; flex-direction: column; align-items: flex-start; background: rgba(11,5,32,.45); transition: border-color var(--rapido) var(--ease), transform var(--padrao) var(--ease); }
 .cat:hover { border-color: var(--mint); transform: translateY(-3px); }
 .cat svg { width: 40px; height: 40px; color: var(--mint); margin-bottom: 12px; }
 .cat b { font-size: 18px; font-weight: 800; line-height: 1.25; }
@@ -195,7 +202,7 @@ em { font-style: normal; color: var(--mint); }
 .l-marca { font-weight: 800; color: var(--mint); font-size: 15px; }
 .l-modelo { min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
 .l-modelo b { font-weight: 700; font-size: 15.5px; line-height: 1.3; }
-.l-modelo mark { background: rgba(79,240,210,.25); color: inherit; border-radius: 3px; }
+.peca mark { background: rgba(79,240,210,.25); color: inherit; border-radius: 3px; }
 .l-compat { font-size: 12.5px; color: var(--muted); padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); }
 .l-preco, .l-disp { justify-self: center; }
 .peca .btn { justify-self: end; min-width: 108px; }
@@ -226,7 +233,7 @@ em { font-style: normal; color: var(--mint); }
 .sugestoes h3 { color: var(--mint); }
 .sugestoes > p { font-size: 14.5px; color: var(--muted); margin-bottom: 10px; }
 .sug-grade { width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 16px; }
-.sug { display: grid; gap: 6px; justify-items: start; padding: 16px; text-align: left; border-radius: 16px; border: 1.5px solid var(--line); background: var(--glass); color: #fff; font-family: inherit; cursor: pointer; transition: border-color .15s, transform .15s, background .15s; }
+.sug { display: grid; gap: 6px; justify-items: start; padding: 16px; text-align: left; border-radius: 16px; border: 1.5px solid var(--line); background: var(--glass); color: #fff; font-family: inherit; cursor: pointer; transition: border-color var(--rapido) var(--ease), transform var(--padrao) var(--ease), background var(--rapido) var(--ease); }
 .sug:hover { border-color: var(--mint); background: rgba(79,240,210,.08); transform: translateY(-2px); }
 .sug small { font: 600 12px/1 "Oswald", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--mint); }
 .sug b { font-size: 19px; font-weight: 800; line-height: 1.2; }
@@ -250,8 +257,8 @@ em { font-style: normal; color: var(--mint); }
 @media (max-width: 400px) { .pilula b { display: none; } .pilula > span { font-size: 0; } .pilula #pilula-txt { font-size: 15.5px; } }
 @media (min-width: 900px) { .pilula { left: auto; right: 96px; } }
 
-.aviso { position: fixed; left: 50%; bottom: 92px; z-index: 40; translate: -50% 12px; max-width: min(440px, 92vw); padding: 12px 18px; border-radius: 14px; background: #fff; color: var(--bg1); font-weight: 700; font-size: 14.5px; text-align: center; box-shadow: 0 14px 36px rgba(0,0,0,.5); opacity: 0; pointer-events: none; transition: opacity .2s, translate .2s; }
-.aviso.on { opacity: 1; translate: -50% 0; }
+.aviso { position: fixed; left: 50%; bottom: 92px; z-index: 40; translate: -50% 12px; max-width: min(440px, 92vw); padding: 12px 18px; border-radius: 14px; background: #fff; color: var(--bg1); font-weight: 700; font-size: 14.5px; text-align: center; box-shadow: 0 14px 36px rgba(0,0,0,.5); opacity: 0; pointer-events: none; transition: opacity var(--rapido) var(--ease-sai), translate var(--rapido) var(--ease-sai); }
+.aviso.on { opacity: 1; translate: -50% 0; transition: opacity 220ms var(--ease-entra), translate 220ms var(--ease-entra); }
 
 .gaveta { margin: 0 0 0 auto; width: min(460px, 100%); height: 100dvh; max-height: none; max-width: none; padding: 0; border: 0; border-left: 1.5px solid var(--line); background: #140a33; color: var(--text); }
 .gaveta[open] { display: flex; flex-direction: column; }
@@ -349,7 +356,7 @@ details { border-radius: 18px; background: var(--glass); border: 1.5px solid var
 details[open] { border-color: rgba(79,240,210,.55); }
 summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; font-weight: 800; font-size: 17px; }
 summary::-webkit-details-marker { display: none; }
-summary::after { content: ""; flex: none; width: 22px; height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%234ff0d2' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; transition: rotate .2s; }
+summary::after { content: ""; flex: none; width: 22px; height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%234ff0d2' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; transition: rotate var(--padrao) var(--ease); }
 details[open] summary::after { rotate: 180deg; }
 details p { padding: 0 22px 20px; color: var(--muted); font-size: 16px; }
 
@@ -368,12 +375,58 @@ footer a:hover { color: #fff; }
 .flutua svg { width: 32px; height: 32px; }
 
 /* entrada suave (só com JavaScript ligado) */
-.js .surge { opacity: 0; translate: 0 22px; transition: opacity .6s ease, translate .6s ease; }
+.js .surge { opacity: 0; translate: 0 20px; transition: opacity var(--lento) var(--ease-entra) var(--atraso, 0ms), translate var(--lento) var(--ease-entra) var(--atraso, 0ms); }
 .js .surge.visto { opacity: 1; translate: 0 0; }
+
+/* ---------- Movimento ---------- */
+@keyframes sobe { from { opacity: 0; translate: 0 20px; } }
+@keyframes sobe-pouco { from { opacity: 0; translate: 0 8px; } }
+@keyframes aparece { from { opacity: 0; } }
+@keyframes chega { from { opacity: 0; scale: .94; } }
+@keyframes bolha { from { opacity: 0; scale: .8; translate: 0 8px; } }
+@keyframes pulo { 50% { scale: 1.3; } }
+@keyframes confirma { 40% { scale: 1.08; } }
+@keyframes flutua-leve { to { translate: 0 -5px; } }
+@keyframes respira { to { opacity: .7; scale: 1.04; } }
+@keyframes gaveta-lado { from { opacity: 0; translate: 48px 0; } }
+@keyframes gaveta-baixo { from { opacity: 0; translate: 0 48px; } }
+@keyframes gaveta-sai-lado { to { opacity: 0; translate: 48px 0; } }
+@keyframes gaveta-sai-baixo { to { opacity: 0; translate: 0 48px; } }
+
+/* abertura: o texto entra em cascata, o celular chega e a conversa acontece */
+.js .hero .eyebrow, .js .hero h1, .js .hero .lead, .js .hero .acoes, .js .hero .selos { animation: sobe var(--lento) var(--ease-entra) both; }
+.js .hero h1 { animation-delay: 70ms; } .js .hero .lead { animation-delay: 140ms; } .js .hero .acoes { animation-delay: 210ms; } .js .hero .selos { animation-delay: 280ms; }
+.js .cena .fone { animation: chega 640ms var(--ease-entra) 180ms both; }
+.js .msg { animation: bolha 340ms var(--ease-pop) both; animation-delay: calc(900ms + var(--i) * 520ms); }
+.msg.eu { transform-origin: 100% 100%; } .msg.ela { transform-origin: 0 100%; }
+.msg:nth-child(1) { --i: 0; } .msg:nth-child(2) { --i: 1; } .msg:nth-child(3) { --i: 2; } .msg:nth-child(4) { --i: 3; } .msg:nth-child(5) { --i: 4; } .msg:nth-child(6) { --i: 5; }
+.js .etiqueta { animation: chega 380ms var(--ease-pop) both, flutua-leve 3.2s ease-in-out infinite alternate; }
+.js .etiqueta.a { animation-delay: 2.6s, 3s; } .js .etiqueta.b { animation-delay: 3.4s, 3.8s; }
+.cena::before { animation: respira 5s ease-in-out infinite alternate; }
+
+/* tabela de preços: linhas e sugestões entram em cascata curta */
+.linhas .peca { animation: sobe-pouco 240ms var(--ease-entra) both; animation-delay: calc(var(--n, 0) * 24ms); }
+.linhas .peca.fixa { animation: none; }
+.sug { animation: sobe-pouco 300ms var(--ease-entra) both; animation-delay: calc(var(--n, 0) * 36ms); }
+.btn.confirma { animation: confirma 320ms var(--ease-pop); }
+.badge.pulo { animation: pulo 320ms var(--ease-pop); }
+.pilula:not([hidden]) { animation: sobe 320ms var(--ease-entra); }
+.abas button { transition: background var(--rapido) var(--ease), border-color var(--rapido) var(--ease), color var(--rapido) var(--ease); }
+.peca { transition: background var(--rapido) var(--ease); }
+details[open] p { animation: sobe-pouco 240ms var(--ease-entra); }
+
+/* painel do pedido: desliza para entrar (mais devagar) e para sair (mais rápido) */
+.gaveta[open] { animation: gaveta-lado 360ms var(--ease-entra); }
+.gaveta[open]::backdrop { animation: aparece 300ms var(--ease); }
+.gaveta.saindo { animation: gaveta-sai-lado 200ms var(--ease-sai) forwards; }
+@media (max-width: 600px) {
+  .gaveta[open] { animation-name: gaveta-baixo; }
+  .gaveta.saindo { animation-name: gaveta-sai-baixo; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .surge { opacity: 1; translate: none; transition: none; }
-  .btn, .servico, .cat, .sug, .flutua, .aviso { transition: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 </head>
@@ -1088,8 +1141,10 @@ function destacar(texto) {
   return frag;
 }
 
-function linhaPeca(p) {
+let animarDesde = 0; // "Mostrar mais" anima só as linhas novas
+function linhaPeca(p, i = -1) {
   const li = Object.assign(document.createElement("li"), { className: "peca" + (escolhidos.includes(p.id) ? " escolhida" : "") });
+  if (i < animarDesde) li.classList.add("fixa"); else li.style.setProperty("--n", Math.min(i - animarDesde, 8));
   li.dataset.id = p.id;
   const [tipo, classe] = tipoDe(p);
   const cTipo = Object.assign(document.createElement("span"), { className: "l-tipo" });
@@ -1151,7 +1206,7 @@ function atualizar() {
   const inicial = !termos.length && filtro.aba === "todas" && !filtro.tudo && SUGESTOES.length > 0;
   $("sugestoes").hidden = !inicial;
   if (inicial) {
-    $("sug-grade").replaceChildren(...SUGESTOES.map(cartaoSugestao));
+    $("sug-grade").replaceChildren(...SUGESTOES.map((m, i) => { const c = cartaoSugestao(m); c.style.setProperty("--n", i); return c; }));
     $("ver-tudo").textContent = `Ver a tabela completa (${PECAS.length.toLocaleString("pt-BR")} peças)`;
     $("info").textContent = `${PECAS.length.toLocaleString("pt-BR")} peças na tabela · estoque de ${atualizado}`;
     document.querySelector(".cabeca").hidden = true; $("vazio").hidden = true; $("mostrar-mais").hidden = true;
@@ -1177,6 +1232,7 @@ function redesenhar(id) {
   if (!velho) return;
   const tinhaFoco = velho.contains(document.activeElement);
   const novo = linhaPeca(porId.get(id));
+  if (escolhidos.includes(id)) novo.querySelector(".btn").classList.add("confirma");
   velho.replaceWith(novo);
   if (tinhaFoco) novo.querySelector("button").focus();
 }
@@ -1198,7 +1254,9 @@ function totalCentavos() { return escolhidos.reduce((s, id) => s + (porId.get(id
 function atualizarPedido() {
   const n = escolhidos.length, total = totalCentavos();
   const rotulo = `${n} ${n === 1 ? "conserto" : "consertos"} · ${reais(total)}`;
-  $("badge").hidden = n === 0; $("badge").textContent = n;
+  $("badge").hidden = n === 0;
+  if ($("badge").textContent !== String(n)) { $("badge").classList.remove("pulo"); void $("badge").offsetWidth; $("badge").classList.add("pulo"); }
+  $("badge").textContent = n;
   $("abrir-carrinho").setAttribute("aria-label", n ? `Abrir pedido de conserto: ${rotulo}` : "Abrir pedido de conserto, vazio");
   $("pilula").hidden = n === 0 || $("carrinho").open;
   $("pilula-txt").textContent = rotulo;
@@ -1244,7 +1302,7 @@ $("q").addEventListener("keydown", e => { if (e.key === "Escape" && e.target.val
 $("limpar-busca").addEventListener("click", () => { $("q").value = ""; filtro.q = ""; mostrando = POR_PAGINA; atualizar(); $("q").focus(); });
 document.querySelectorAll("[data-aba]").forEach(b => b.addEventListener("click", () => { filtro.aba = b.dataset.aba; filtro.tudo = false; mostrando = POR_PAGINA; if (PECAS.length) atualizar(); }));
 $("ver-tudo").addEventListener("click", () => { filtro.tudo = true; mostrando = POR_PAGINA; atualizar(); });
-$("mostrar-mais").addEventListener("click", () => { mostrando += POR_PAGINA * 2; atualizar(); });
+$("mostrar-mais").addEventListener("click", () => { animarDesde = mostrando; mostrando += POR_PAGINA * 2; atualizar(); animarDesde = 0; });
 $("perguntar").addEventListener("click", () => {
   form.elements.tipo.value = "conserto"; ajustarTipo();
   $("f-aparelho").value = filtro.q.trim();
@@ -1257,9 +1315,16 @@ const dlg = $("carrinho");
 const abrir = () => { dlg.showModal(); atualizarPedido(); };
 $("abrir-carrinho").addEventListener("click", abrir);
 $("pilula").addEventListener("click", abrir);
-$("fechar-carrinho").addEventListener("click", () => dlg.close());
+function fechar() {
+  if (!dlg.open || dlg.classList.contains("saindo")) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { dlg.close(); return; }
+  dlg.classList.add("saindo");
+  dlg.addEventListener("animationend", () => { dlg.classList.remove("saindo"); dlg.close(); }, { once: true });
+}
+$("fechar-carrinho").addEventListener("click", fechar);
+dlg.addEventListener("cancel", e => { e.preventDefault(); fechar(); }); // tecla Esc
 dlg.addEventListener("close", atualizarPedido);
-dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); }); // toque fora fecha
+dlg.addEventListener("click", e => { if (e.target === dlg) fechar(); }); // toque fora fecha
 $("limpar-carrinho").addEventListener("click", () => {
   if (!confirm("Limpar o pedido?")) return;
   const ids = escolhidos.splice(0); salvar(); ids.forEach(redesenhar); atualizarPedido();
@@ -1282,7 +1347,14 @@ carregarEstoque();
 // ---------- Entrada suave ao rolar ----------
 const itens = document.querySelectorAll(".surge");
 if ("IntersectionObserver" in window) {
-  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visto"); obs.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, irmaos = [...el.parentElement.children].filter(c => c.classList.contains("surge") && !c.classList.contains("visto"));
+    const atraso = Math.min(irmaos.indexOf(el), 5) * 60; // cascata curta: no máximo 300 ms
+    el.style.setProperty("--atraso", atraso + "ms");
+    el.classList.add("visto"); obs.unobserve(el);
+    setTimeout(() => { el.classList.remove("surge", "visto"); el.style.removeProperty("--atraso"); }, atraso + 600);
+  }), { rootMargin: "0px 0px -8% 0px" });
   itens.forEach(i => obs.observe(i));
 } else itens.forEach(i => i.classList.add("visto"));
 </script>
