@@ -340,6 +340,43 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--m
 .sac b { display: block; font-size: 22px; font-weight: 900; text-transform: uppercase; letter-spacing: .03em; line-height: 1.2; }
 .sac span { font-size: 15px; font-weight: 600; }
 .sac strong { font-size: clamp(22px, 3vw, 30px); font-weight: 900; font-variant-numeric: tabular-nums; }
+.loja .rua { font-size: 14px; font-weight: 600; color: var(--muted); }
+.loja.ativa { border-color: var(--mint); background: rgba(79,240,210,.08); }
+
+/* ---------- Mapa das lojas ---------- */
+.mapa { position: relative; margin-bottom: 34px; border-radius: 26px; overflow: hidden; border: 1.5px solid var(--line); background: #120a2e; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+#mapa { height: clamp(380px, 46vw, 460px); background: #120a2e; }
+@media (max-width: 600px) { .mapa .leaflet-control-zoom { display: none; } }
+.mapa-acoes { position: absolute; z-index: 500; left: 14px; top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.mapa-acoes button { padding: 9px 15px; border-radius: 999px; border: 1.5px solid var(--line); background: rgba(11,5,32,.82); backdrop-filter: blur(8px); color: #fff; font: 700 13px/1 "Montserrat", sans-serif; cursor: pointer; transition: border-color var(--rapido) var(--ease), background var(--rapido) var(--ease); }
+.mapa-acoes button:hover, .mapa-acoes button[aria-pressed="true"] { border-color: var(--mint); background: rgba(28,14,64,.92); color: var(--mint); }
+.mapa-nota { padding: 11px 16px; border-top: 1.5px solid var(--line); font-size: 13px; font-weight: 600; color: var(--muted); line-height: 1.4; }
+.mapa-falha { display: grid; place-items: center; height: 100%; padding: 24px; text-align: center; color: var(--muted); }
+/* pin em gota com o número da loja */
+.pin-vibe { background: none; border: 0; }
+.pin-vibe span { position: absolute; inset: 0; border-radius: 50% 50% 50% 0; rotate: -45deg; background: linear-gradient(135deg, var(--mint), var(--cyan)); border: 3px solid #fff; box-shadow: 0 6px 16px rgba(0,0,0,.45); transition: scale var(--padrao) var(--ease-pop); }
+.pin-vibe b { position: absolute; inset: 0; display: grid; place-items: center; padding-bottom: 4px; font: 800 15px/1 "Montserrat", sans-serif; color: var(--bg1); }
+.pin-vibe:hover span, .pin-vibe.ativo span { scale: 1.18; }
+.pin-vibe.ativo span::after { content: ""; position: absolute; inset: -9px; border-radius: inherit; border: 2px solid var(--mint); animation: pulso 1.6s var(--ease-sai) infinite; }
+@keyframes pulso { from { opacity: .9; scale: .8; } to { opacity: 0; scale: 1.5; } }
+.js .pin-vibe.entra { animation: pin-cai 520ms var(--ease-pop) both; animation-delay: var(--atraso, 0ms); }
+@keyframes pin-cai { from { opacity: 0; translate: 0 -24px; } }
+/* balão do mapa no tema da Vibe */
+.mapa .leaflet-container { font-family: "Montserrat", sans-serif; }
+/* mapa claro do OpenStreetMap virado em noturno, puxado para o roxo da marca */
+.tiles-vibe { filter: invert(1) grayscale(1) brightness(.75) contrast(1.1) sepia(.5) hue-rotate(215deg) saturate(2.2); }
+.mapa .leaflet-popup-content-wrapper { background: #1c0e40; color: #fff; border: 1.5px solid var(--line); border-radius: 18px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+.mapa .leaflet-popup-tip { background: #1c0e40; }
+.mapa .leaflet-popup-content { margin: 16px 18px; min-width: 200px; }
+.mapa .leaflet-container a.leaflet-popup-close-button { color: var(--muted); top: 6px; right: 6px; }
+.balao b { display: block; font-size: 18px; font-weight: 800; }
+.balao small { display: block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mint); margin-bottom: 4px; }
+.balao span { display: block; font-size: 15px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.balao .acoes { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.balao .btn { color: #fff; }
+.mapa .leaflet-control-zoom a { background: rgba(11,5,32,.85) !important; color: #fff !important; border-color: var(--line) !important; }
+.mapa .leaflet-control-attribution { background: rgba(11,5,32,.7) !important; color: var(--muted) !important; font-size: 10px; }
+.mapa .leaflet-control-attribution a { color: var(--muted) !important; }
 
 /* ---------- Instagram ---------- */
 .insta { display: grid; grid-template-columns: 1fr auto; gap: clamp(24px, 5vw, 60px); align-items: center; padding: clamp(26px, 4vw, 48px); border-radius: 30px;
@@ -675,6 +712,14 @@ details[open] p { animation: sobe-pouco 240ms var(--ease-entra); }
       <h2>Seis lojas em <em>Armação dos Búzios.</em></h2>
       <p class="lead">Cada loja tem o seu WhatsApp. Fale direto com a unidade mais perto.</p>
     </div>
+    <div class="mapa surge" id="mapa-lojas" hidden>
+      <div id="mapa" role="region" aria-label="Mapa com as lojas da Vibe em Búzios"></div>
+      <div class="mapa-acoes" role="group" aria-label="Mostrar no mapa">
+        <button type="button" data-ver="todas" aria-pressed="true">Todas</button>
+        <button type="button" data-ver="Centro" aria-pressed="false">Centro</button>
+        <button type="button" data-ver="Manguinhos" aria-pressed="false">Manguinhos</button>
+      </div>
+    </div>
     <div id="lista-lojas"><noscript><p class="lead">A lista de lojas precisa do JavaScript ligado. Enquanto isso, fale com o SAC pelo WhatsApp abaixo.</p></noscript></div>
     <a class="sac surge" href="https://wa.me/5522991837583?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20preciso%20de%20ajuda%20do%20SAC%20da%20Vibe%20Eletronics." target="_blank" rel="noopener">
       <svg style="color:#fff"><use href="#wa"/></svg>
@@ -795,7 +840,7 @@ document.documentElement.classList.add("js");
 const LOJAS = [
   { nome: "Loja Noi",        bairro: "Centro",     fone: "5522981012426", mapa: "-22.7561717,-41.8883556" },
   { nome: "Loja Sky",        bairro: "Centro",     fone: "5522981724239", mapa: "-22.7566832,-41.8888317" },
-  { nome: "Loja Pedras",     bairro: "Centro",     fone: "5522997558963" },
+  { nome: "Loja Pedras",     bairro: "Centro",     fone: "5522997558963", rua: "Rua das Pedras" },
   { nome: "Loja Manguinhos", bairro: "Manguinhos", fone: "5522981724250", mapa: "-22.771125,-41.9122112" },
   { nome: "Loja Princesa",   bairro: "Manguinhos", fone: "5522981462169", mapa: "-22.7716795,-41.9125966" },
   { nome: "Loja Fox",        bairro: "Manguinhos", fone: "5522981462163", mapa: "-22.7728478,-41.9133801" },
@@ -811,19 +856,119 @@ for (const bairro of bairros) {
   for (const loja of LOJAS.filter(l => l.bairro === bairro)) {
     const card = document.createElement("div");
     card.className = "card loja surge";
+    loja.card = card;
     const nome = Object.assign(document.createElement("b"), { textContent: loja.nome });
     const fone = Object.assign(document.createElement("span"), { className: "fone-n", textContent: formatar(loja.fone) });
+    if (loja.rua) card.append(Object.assign(document.createElement("span"), { className: "rua", textContent: loja.rua }));
     const acoes = Object.assign(document.createElement("div"), { className: "acoes" });
     const orc = Object.assign(document.createElement("button"), { type: "button", className: "btn wa mini", textContent: "Orçamento" });
     orc.addEventListener("click", () => escolherLoja(loja.fone));
     const zap = Object.assign(document.createElement("a"), { className: "btn linha mini", textContent: "WhatsApp", href: `https://wa.me/${loja.fone}`, target: "_blank", rel: "noopener" });
     acoes.append(orc, zap);
-    if (loja.mapa) acoes.append(Object.assign(document.createElement("a"), { className: "btn linha mini", textContent: "Mapa", href: `https://www.google.com/maps?q=${loja.mapa}`, target: "_blank", rel: "noopener" }));
-    card.append(nome, fone, acoes);
+    if (loja.mapa) {
+      const ver = Object.assign(document.createElement("button"), { type: "button", className: "btn linha mini", textContent: "Ver no mapa" });
+      ver.addEventListener("click", () => mostrarNoMapa(loja));
+      acoes.append(ver);
+    }
+    card.prepend(nome);
+    card.append(fone, acoes);
     grade.append(card);
   }
   lista.append(titulo, grade);
 }
+
+// mapa das lojas (Leaflet + mapa escuro do CARTO/OpenStreetMap), carregado só quando a seção chega perto da tela
+const caixaMapa = document.getElementById("mapa-lojas");
+let mapa = null, mapaPronto = null;
+const comPin = LOJAS.filter(l => l.mapa);
+comPin.forEach((l, i) => { l.num = i + 1; l.pos = l.mapa.split(",").map(Number); });
+
+function carregarArquivo(tag, attrs) {
+  return new Promise((ok, erro) => {
+    const el = Object.assign(document.createElement(tag), attrs);
+    el.onload = ok; el.onerror = erro;
+    document.head.append(el);
+  });
+}
+
+function balao(loja) {
+  const div = document.createElement("div");
+  div.className = "balao";
+  div.innerHTML = `<small>${loja.bairro}</small><b></b><span>${formatar(loja.fone)}</span><div class="acoes"></div>`;
+  div.querySelector("b").textContent = loja.nome;
+  const orc = Object.assign(document.createElement("button"), { type: "button", className: "btn wa mini", textContent: "Orçamento" });
+  orc.addEventListener("click", () => escolherLoja(loja.fone));
+  const rota = Object.assign(document.createElement("a"), { className: "btn linha mini", textContent: "Como chegar", href: `https://www.google.com/maps/dir/?api=1&destination=${loja.mapa}`, target: "_blank", rel: "noopener" });
+  div.querySelector(".acoes").append(orc, rota);
+  return div;
+}
+
+function marcarAtiva(loja) {
+  for (const l of comPin) {
+    l.marcador?.getElement()?.classList.toggle("ativo", l === loja);
+    l.card?.classList.toggle("ativa", l === loja);
+  }
+}
+
+function enquadrar(bairro) {
+  const alvo = comPin.filter(l => bairro === "todas" || l.bairro === bairro);
+  mapa.flyToBounds(L.latLngBounds(alvo.map(l => l.pos)), { paddingTopLeft: [60, 110], paddingBottomRight: [60, 60], maxZoom: 17, duration: reduzMovimento() ? 0 : 0.8 });
+  for (const b of caixaMapa.querySelectorAll("[data-ver]")) b.setAttribute("aria-pressed", String(b.dataset.ver === bairro));
+}
+
+const reduzMovimento = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function iniciarMapa() {
+  if (mapaPronto) return mapaPronto;
+  caixaMapa.hidden = false;
+  mapaPronto = Promise.all([
+    carregarArquivo("link", { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" }),
+    carregarArquivo("script", { src: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" }),
+  ]).then(() => {
+    const toque = matchMedia("(pointer: coarse)").matches;
+    mapa = L.map("mapa", { scrollWheelZoom: false, dragging: !toque, tap: false, zoomSnap: 0.5, zoomControl: false });
+    L.control.zoom({ position: "topright" }).addTo(mapa);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, className: "tiles-vibe",
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(mapa);
+    mapa.fitBounds(L.latLngBounds(comPin.map(l => l.pos)), { paddingTopLeft: [50, 100], paddingBottomRight: [50, 50] });
+    comPin.forEach((loja, i) => {
+      const icone = L.divIcon({ className: "pin-vibe entra", html: `<span></span><b>${loja.num}</b>`, iconSize: [40, 40], iconAnchor: [20, 48], popupAnchor: [0, -46] });
+      loja.marcador = L.marker(loja.pos, { icon: icone, title: loja.nome, alt: loja.nome, riseOnHover: true })
+        .addTo(mapa)
+        .bindPopup(balao(loja), { closeButton: true, autoPanPadding: [20, 20] })
+        .on("popupopen", () => marcarAtiva(loja))
+        .on("popupclose", () => marcarAtiva(null));
+      loja.marcador.getElement()?.style.setProperty("--atraso", `${i * 90}ms`);
+    });
+    // no celular, um dedo rola a página; o mapa só arrasta depois de tocar nele
+    if (toque) mapa.once("click", () => mapa.dragging.enable());
+    for (const b of caixaMapa.querySelectorAll("[data-ver]")) b.addEventListener("click", () => { mapa.closePopup(); enquadrar(b.dataset.ver); });
+    if (comPin.length < LOJAS.length) {
+      const sem = LOJAS.filter(l => !l.mapa).map(l => `${l.nome} (${l.rua || l.bairro})`).join(", ");
+      caixaMapa.append(Object.assign(document.createElement("p"), { className: "mapa-nota", textContent: `Ainda sem pin no mapa: ${sem}. Fale com a loja pelo WhatsApp para saber como chegar.` }));
+    }
+  }).catch(() => {
+    document.getElementById("mapa").innerHTML = '<p class="mapa-falha">Não foi possível carregar o mapa agora. Use os botões das lojas abaixo.</p>';
+  });
+  return mapaPronto;
+}
+
+function mostrarNoMapa(loja) {
+  iniciarMapa().then(() => {
+    if (!mapa) return;
+    caixaMapa.scrollIntoView({ behavior: reduzMovimento() ? "auto" : "smooth", block: "center" });
+    mapa.flyTo(loja.pos, 17, { duration: reduzMovimento() ? 0 : 0.8 });
+    mapa.once("moveend", () => loja.marcador.openPopup());
+    for (const b of caixaMapa.querySelectorAll("[data-ver]")) b.setAttribute("aria-pressed", "false");
+  });
+}
+
+if ("IntersectionObserver" in window) {
+  const vigia = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { vigia.disconnect(); iniciarMapa(); } }, { rootMargin: "600px 0px" });
+  vigia.observe(document.getElementById("lojas"));
+} else iniciarMapa();
 
 // opções do formulário, agrupadas por bairro
 const select = document.getElementById("f-loja");
