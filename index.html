@@ -1085,7 +1085,7 @@ function distancia(a, b, max) {
 
 // modelos que a peça atende, sem cor e sem 4G/5G: "8 Plus Preto" -> "8 plus"; "J6 / J4 Plus" -> ["j6", "j4 plus"]
 function modelosDe(p) {
-  const fonte = p.cat === "bateria" ? p.compat : p.modelo;
+  const fonte = p.modelo;
   if (fonte.includes(">")) return []; // faixa de modelos ("XR > 17 Pro")
   return fonte.split("/").map(m => norm(m).split(" ").filter(w => w && !CORES.has(w) && !/^[45]g$/.test(w)).join(" ")).filter(Boolean);
 }
@@ -1095,7 +1095,7 @@ function indexar(p) {
   const marca = tira(p.marca);
   const nomes = [marca, ...(APELIDOS[marca] || [])].filter(Boolean);
   p.modelos = modelosDe(p);
-  p.busca = norm(`${p.tipo} ${nomes.join(" ")} ${p.modelo} ${p.cor} ${p.compat} ${SINONIMOS[p.cat]}`);
+  p.busca = norm(`${p.tipo} ${nomes.join(" ")} ${p.modelo} ${p.cor} ${p.compat} ${p.codigo || ""} ${SINONIMOS[p.cat]}`);
   p.palavras = [...new Set(p.busca.split(" "))];
   // versões sem espaço: "iphone11", "motog54", "galaxya54", "note12"
   const juntos = p.modelos.flatMap(m => { const c = m.replace(/ /g, ""); return [c, ...nomes.map(n => n + c)]; });
@@ -1139,7 +1139,7 @@ function servicoDe(p) {
   const cor = p.cor ? ` (${p.cor})` : "";
   if (p.cat === "frontal") return `Troca de frontal ${tipo === "Frontal" ? "" : tipo + " "}${p.marca} ${p.modelo}${cor}`.replace(/\s+/g, " ");
   if (p.cat === "traseira") return `Troca de ${tipo === "Vidro" ? "vidro" : "traseira"} ${p.marca} ${p.modelo}${cor}`;
-  if (p.cat === "bateria") return `Troca de bateria ${p.marca} ${p.modelo}${p.compat ? ` (${p.compat})` : ""}`;
+  if (p.cat === "bateria") return `Troca de bateria ${p.marca} ${p.modelo}`;
   return `Troca de conector de carga ${p.marca} ${p.modelo}`;
 }
 
@@ -1194,6 +1194,16 @@ async function carregarEstoque() {
       if (!p.marca && !p.modelo) continue;
       p.marca = MARCA_CERTA[tira(p.marca)] || p.marca;
       p.id = [cat, p.tipo, p.marca, p.modelo, p.cor, p.compat].map(tira).join("|");
+      // bateria: o cliente procura pelo celular, não pelo código da bateria (que fica só para a busca)
+      if (cat === "bateria" && p.compat) { p.codigo = p.modelo; p.modelo = p.compat; p.compat = ""; }
+      if (cat === "bateria") { // duas baterias para os mesmos celulares: mostra uma só (a com estoque, depois a mais barata)
+        const igual = PECAS.find(o => o.cat === "bateria" && tira(o.marca) === tira(p.marca) && tira(o.modelo) === tira(p.modelo));
+        if (igual) {
+          const melhor = (b, a) => (b.tem - a.tem) || ((a.centavos ?? 1e12) - (b.centavos ?? 1e12));
+          if (melhor(p, igual) > 0) { indexar(p); PECAS[PECAS.indexOf(igual)] = p; }
+          continue;
+        }
+      }
       indexar(p);
       PECAS.push(p);
     }
